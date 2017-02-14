@@ -1,22 +1,71 @@
 
 
-// First lets create our drawing surface out of existing SVG element
-// If you want to create new surface just provide dimensions
-// like s = Snap(800, 600);
-// First lets create our drawing surface out of existing SVG element
-// If you want to create new surface just provide dimensions
-// like s = Snap(800, 600);
+
+//STATE
+var earth = 0,
+ 	business = 0,
+ 	news_ids = [],
+ 	states = [(earth, business, 0)],
+ 	selected_question = 0;
+ 	
+ 	//Links to SVG elements
+ var s = Snap("#kantoor"),
+ 	help = s.select("g[id='help-button']"),
+ 	answer_a = s.select("g[id='a']"),
+ 	answer_b = s.select("g[id='b']"),
+ 	answer_c = s.select("g[id='c']"),
+ 	text_a = s.select("text[id='antwoord-a']"),
+ 	text_b = s.select("text[id='antwoord-b']"),
+ 	text_c = s.select("text[id='antwoord-c']"),
+ 	trophee1 = s.select("g[id='kikker-beker']"),
+ 	koffer = s.select("g[id='koffer']"),
+ 	vraag = s.select("g[id='vraag']"),
+ 	newsText = s.select("g[id='news-tekst']");
+
+class Answer {
+	constructor(id, text, earth, business, news_id, delay, next) {
+		this.id = id;
+		this.text = text;
+		this.earth = earth;
+		this.business = business;
+		this.news_id = news_id;
+		this.delay = delay;
+		this.next = next;
+	}
+};
+
+class NewsText {
+	constructor(id, text) {
+		this.id = id;
+		this.text = " --- " + text;
+	}
+}
+
+var newsArray = [new NewsText(0, "Polar bears are dying"), new NewsText(1, "ice cream is in demand"), new NewsText(2, "the world is ending")];
+
+var questions = [{"id": 0, "text": "gender", "answerA": new Answer(0.1, "A. Man", 0, 0, 0, 0, 1), 
+"answerB": new Answer(0.2, "B. Vrouw", 0, 0, 0, 0, 0), "answerC": new Answer(0.3, "C. Ik twijfel", 0, 0, 0, 0, 0)}, 
+{"id": 1, "text": "CEO", "answerA": new Answer(1.1, "Groen", 0, 0, 0, 0, 2), 
+"answerB": new Answer(1.2, "Fossiel", 0, 0, 0, 0, 2), 
+"answerC": null}, 
+{"id": 2, "text": "Fabriek", "answerA": new Answer(2.1, "Duurzaam", 1, -1, 0, 0, 2), 
+"answerB": new Answer(2.2, "Fossiel", -1, -1, 0, 0, 2), 
+"answerC": null}];
 
 
-var s = Snap("#kantoor");
 
-help = s.select("g[id='help-button']");
-answer_a = s.select("g[id='a']");
-answer_b = s.select("g[id='b']");
-answer_c = s.select("g[id='c']");
-trophee1 = s.select("g[id='kikker-beker']");
-koffer = s.select("g[id='koffer']");
-newsText = s.select("g[id='news-tekst']");
+//---------------- GAME LOGIC -------------------------------------------------------------
+function displayQuestion(id) {
+	txt = questions[id].text;
+	a = questions[id].answerA.text;
+	b = questions[id].answerB.text;
+	c = questions[id].answerC.text ? questions[id].answerC.text : "C.";
+	vraag.select("text").attr({ text: txt});
+	text_a.attr({ text: a});
+	text_b.attr({ text: b});
+	text_c.attr({ text: c});
+};
+
    		
 function animateHelpButton(){
 	red = help.select("path[fill='#e0421d']");
@@ -77,17 +126,19 @@ function setUp(){
 	function moveNewsBanner () {
 		var startMatrix = new Snap.Matrix(),
 		midMatrix = new Snap.Matrix();
+		newsText.transform(startMatrix);
 		startMatrix.translate(1000, 0);
-		midMatrix.translate(-10, 0);
+		midMatrix.translate(-100, 0);
 
-		newsText.animate({opacity: 0.7, transform: startMatrix}, 6000, mina.linear, function () {
-			newsText.animate({opacity: 1.0, transform: midMatrix}, 1, mina.easeout, function () {
+		newsText.animate({opacity: 0.7, transform: midMatrix}, 7000, mina.linear, function () {
+			newsText.animate({opacity: 1.0, transform: startMatrix}, 1, mina.easeout, function () {
 				moveNewsBanner();
 			});
 		});
 
 	};
 	moveNewsBanner();
+	displayQuestion(0);
 
 };
 
