@@ -44,27 +44,47 @@ class NewsText {
 var newsArray = [new NewsText(0, "Polar bears are dying"), new NewsText(1, "ice cream is in demand"), new NewsText(2, "the world is ending")];
 
 var questions = [{"id": 0, "text": "gender", "answerA": new Answer(0.1, "A. Man", 0, 0, 0, 0, 1), 
-"answerB": new Answer(0.2, "B. Vrouw", 0, 0, 0, 0, 0), "answerC": new Answer(0.3, "C. Ik twijfel", 0, 0, 0, 0, 0)}, 
+"answerB": new Answer(0.2, "B. Vrouw", 0, 0, 0, 0, 1), "answerC": new Answer(0.3, "C. Ik twijfel", 0, 0, 0, 0, 1)},
+
 {"id": 1, "text": "CEO", "answerA": new Answer(1.1, "Groen", 0, 0, 0, 0, 2), 
 "answerB": new Answer(1.2, "Fossiel", 0, 0, 0, 0, 2), 
 "answerC": null}, 
-{"id": 2, "text": "Fabriek", "answerA": new Answer(2.1, "Duurzaam", 1, -1, 0, 0, 2), 
-"answerB": new Answer(2.2, "Fossiel", -1, -1, 0, 0, 2), 
+
+{"id": 2, "text": "Fabriek", "answerA": new Answer(2.1, "Duurzaam", 1, -1, 0, 0, 1), 
+"answerB": new Answer(2.2, "Fossiel", -1, -1, 0, 0, 1), 
 "answerC": null}];
 
 
 
 //---------------- GAME LOGIC -------------------------------------------------------------
 function displayQuestion(id) {
-	txt = questions[id].text;
-	a = questions[id].answerA.text;
-	b = questions[id].answerB.text;
-	c = questions[id].answerC.text ? questions[id].answerC.text : "C.";
+	selected_question = id;
+	var txt = questions[id].text,
+		a = questions[id].answerA.text,
+		b = questions[id].answerB.text,
+		c = questions[id].answerC; 
+	
+	if (c === null) {
+		text_c.attr({ text: ""});
+		answer_c.attr({display: 'none'});
+	} else {
+		text_c.attr({ text: c.text});
+		answer_c.attr({display: ''});
+	}
+
 	vraag.select("text").attr({ text: txt});
 	text_a.attr({ text: a});
 	text_b.attr({ text: b});
-	text_c.attr({ text: c});
+	
 };
+
+function updateForAnswer(answer) {
+
+}
+
+function updateStates(){
+
+}
 
    		
 function animateHelpButton(){
@@ -81,8 +101,7 @@ function animateHelpButton(){
 
 function resetSVG (){
     var t = new Snap.Matrix()
-	t.translate(0, 0);
-	help.transform(t);
+	help.transform({fill: red});
 };
 
 function breakNews () {
@@ -113,14 +132,22 @@ function setUp(){
 	//Setup answer buttons	
 	answer_a.node.onclick = function () {
 		changeBackgroundColor("grey", "#99a2a2", answer_a.select("rect"));
+		var next = questions[selected_question].answerA.next;
+		displayQuestion(next);
 	};
 
 	answer_b.node.onclick = function () {
 		changeBackgroundColor("grey", "#99a2a2", answer_b.select("rect"));
+		var next = questions[selected_question].answerB.next;
+		displayQuestion(next);
 	};
 
 	answer_c.node.onclick = function () {
-		changeBackgroundColor("grey", "#99a2a2", answer_c.select("rect"));
+		if (questions[selected_question].answerC) {
+			changeBackgroundColor("grey", "#99a2a2", answer_c.select("rect"));
+			var next = questions[selected_question].answerA.next;
+			displayQuestion(next);
+		}
 	};
 
 	function moveNewsBanner () {
