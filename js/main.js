@@ -1,8 +1,3 @@
-
-
-
-//STATE
-
  	//Links to SVG elements
  var s = Snap("#kantoor"),
  	help = s.select("g[id='help-button']"),
@@ -57,8 +52,8 @@ new NewsText(5, "Wildgroei aan keurmerken verwart de consument, stelt de Consume
 new NewsText(6, "Consument klaagt dat nieuwe shampoos van Unilever minder goed werken.")
 ];
 
-var questions = [{"id": 0, "text": "Ik ben een:", "answerA": new Answer(0.1, "Man", 0, 0, 0, 0, 1), 
-"answerB": new Answer(0.2, "Vrouw", 0, 0, 0, 0, 0), "answerC": new Answer(0.3, "Ik twijfel", 0, 0, 0, 0, 0)},
+var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answerA": new Answer(0.1, "Man", 0, 0, 0, 0, 1), 
+"answerB": new Answer(0.2, "Vrouw", 0, 0, 0, 0, 0), "answerC": new Answer(0.3, "Geen van beiden.", 0, 0, 0, 0, 0)},
 
 {"id": 1, "text": "Gefeliciteerd! Je bent topman van Unilever. De planeet kreunt onder jouw productie. Je eerste besluit:", "answerA": new Answer(1.1, "Ik gooi het roer om en kies voor een volledig duurzame productie", 1, 0, 0, 0, 2), 
 "answerB": new Answer(1.2, "Ik kan dit niet oplossen. We onderzoeken vergroening maar draaien voorlopig op de oude voet door.", -1, 1, 2, 0, 17), 
@@ -189,7 +184,7 @@ var questions = [{"id": 0, "text": "Ik ben een:", "answerA": new Answer(0.1, "Ma
 "answerB": new Answer(25.2, "Je stapt over op raapzaadolie uit de EU", 1, 1, 0, 0, 100), 
 "answerC": null},
 
-//Tweede optie voor vraag 24:
+//Tweede optie voor vraag 16:
 {"id": 26, "text": "Het gaat goed met je bedrijf, maar de wereld gaat naar de knoppen. Wat doe je?", 
 "answerA": new Answer(50.1, "Je houdt je koers vast.", 1, -1, 0, 0, 100), 
 "answerB": new Answer(50.2, "Je besluit dat je voor einde van de wereld liever op een strand ligt en stapt op.", 3, 0, 0, 0, 100), 
@@ -230,6 +225,13 @@ function findNextQuestion(next_qid, old_qid) {
 
 	if (next_qid === 100 ) {
 		goToLoading();
+	}
+	else if (next_qid === 16) {
+		if global_state.earth > global_state.business {
+			displayQuestion(next_qid);
+		} else {
+			displayQuestion(26);
+		}
 	}
 	else if (next_qid != 3 && next_qid != 18){
 		displayQuestion(next_qid);
