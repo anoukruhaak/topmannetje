@@ -208,6 +208,7 @@ function findNextQuestion(next_qid, old_qid) {
 }
 
 function displayDashboard(id) {
+	window.location.href = "loading.html";
 	selected_question = id;
 
 	if (homeDone) colorButton(answer_c, "green");
@@ -224,6 +225,14 @@ function displayDashboard(id) {
 	text_a.attr({ text: a});
 	text_b.attr({ text: b});
 	text_c.attr({ text: c});
+}
+
+function goToLoading() {
+	window.location.href = "loading.html";
+}
+
+function goToFinal() {
+
 }
 
 function resetButtons() {
