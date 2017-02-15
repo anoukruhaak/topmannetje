@@ -225,11 +225,10 @@ function displayDashboard(id) {
 	answer_c.attr({display: ''});
 
 	document.getElementById('vraag').innerHTML = txt;
-
-
-	// text_a.attr({ text: "A. "+ a});
-	// text_b.attr({ text: "B. " +b});
-	// text_c.attr({ text: "C. "+c});
+	document.getElementById('antw_a').innerHTML = a;
+	document.getElementById('antw_b').innerHTML = b;
+	document.getElementById('antw_b').innerHTML = c;
+	document.getElementById("antw_c").style.visibility = "visible";
 }
 
 function goToLoading() {
@@ -259,19 +258,17 @@ function displayQuestion(id) {
 		b = questions[id].answerB.text,
 		c = questions[id].answerC; 
 	document.getElementById('vraag').innerHTML = txt;
-	
-	// if (c === null) {
-	// 	text_c.attr({ text: ""});
-	// 	answer_c.attr({display: 'none'});
-	// } else {
-	// 	text_c.attr({ text: "C. " + c.text});
-	// 	answer_c.attr({display: ''});
-	// }
+	document.getElementById('antw_a').innerHTML = a;
+	document.getElementById('antw_b').innerHTML = b;
 
-	// vraag.select("text").attr({ text: txt});
-	// text_a.attr({ text: "A. " +a});
-	// text_b.attr({ text:  "B. " + b});
-	
+	if (c === null) {
+		document.getElementById("antw_c").style.visibility = "hidden";
+		answer_c.attr({display: 'none'});
+	} else {
+		document.getElementById("antw_c").style.visibility = "visible";
+		document.getElementById('antw_c').innerHTML = c.text;
+		answer_c.attr({display: ''});
+	}	
 };
 
 
