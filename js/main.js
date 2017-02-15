@@ -95,12 +95,12 @@ var questions = [{"id": 0, "text": "gender", "answerA": new Answer(0.1, "A. Man"
 "answerC": null},
 
 //Personal Groen
-{"id": 9, "text": "9 - Personal 1", "answerA": new Answer(9.1, "Duurzaam", 1, -1, 0, 2, 3), 
-"answerB": new Answer(9.2, "Fossiel", -1, -1, 0, 0, 3), 
+{"id": 9, "text": "9 - Personal 1", "answerA": new Answer(9.1, "Duurzaam", 1, -1, 0, 2, 10), 
+"answerB": new Answer(9.2, "Fossiel", -1, -1, 0, 0, 10), 
 "answerC": null},
 
-{"id": 10, "text": "10 - Personal 2", "answerA": new Answer(2.1, "Duurzaam", 1, -1, 0, 2, 1), 
-"answerB": new Answer(2.2, "Fossiel", 1, -1, 0, 0, 1), 
+{"id": 10, "text": "10 - Personal 2", "answerA": new Answer(2.1, "Duurzaam", 1, -1, 0, 2, 3), 
+"answerB": new Answer(2.2, "Fossiel", 1, -1, 0, 0, 3), 
 "answerC": null},
 
 //Home Groen
@@ -126,8 +126,8 @@ var questions = [{"id": 0, "text": "gender", "answerA": new Answer(0.1, "A. Man"
 "answerB": new Answer(15.2, "Fossiel", -1, -1, 0, 0, 16), 
 "answerC": null},
 
-{"id": 16, "text": "eind groen 16", "answerA": new Answer(16.1, "Duurzaam", 1, -1, 0, 2, 0), 
-"answerB": new Answer(16.2, "Fossiel", -1, -1, 0, 0, 0), 
+{"id": 16, "text": "eind groen 16", "answerA": new Answer(16.1, "Duurzaam", 1, -1, 0, 2, 100), 
+"answerB": new Answer(16.2, "Fossiel", -1, -1, 0, 0, 100), 
 "answerC": null},
 
 //Fossiel start
@@ -152,13 +152,13 @@ var questions = [{"id": 0, "text": "gender", "answerA": new Answer(0.1, "A. Man"
 "answerC": null},
 
 //Fossiel eind
-{"id": 22, "text": "Fossiel Eind", "answerA": new Answer(22.1, "Duurzaam", 1, -1, 0, 2, 0), 
-"answerB": new Answer(22.2, "Fossiel", -1, -1, 0, 0, 0), 
+{"id": 22, "text": "Fossiel Eind", "answerA": new Answer(22.1, "Duurzaam", 1, -1, 0, 2, 100), 
+"answerB": new Answer(22.2, "Fossiel", -1, -1, 0, 0, 100), 
 "answerC": null},
 
 //Duurzaam eind
-{"id": 23, "text": "Fabriek", "answerA": new Answer(23.1, "Duurzaam", 1, -1, 0, 2, 0), 
-"answerB": new Answer(23.2, "Fossiel", -1, -1, 0, 0, 0), 
+{"id": 23, "text": "Fabriek", "answerA": new Answer(23.1, "Duurzaam", 1, -1, 0, 2, 100), 
+"answerB": new Answer(23.2, "Fossiel", -1, -1, 0, 0, 100), 
 "answerC": null}];
 
 
@@ -167,7 +167,6 @@ var questions = [{"id": 0, "text": "gender", "answerA": new Answer(0.1, "A. Man"
 function findNextQuestion(next_qid, old_qid) {
 	
 	function handleCategoryFinished(qid) {
-		console.log(homeDone, careDone, foodDone);
 		if (homeDone && careDone && foodDone) {
 			//calculate points
 			if (global_state.earth > 10 && global_state.business <5) {
@@ -184,18 +183,22 @@ function findNextQuestion(next_qid, old_qid) {
 
 	function updateCategoriesFinished(old_qid){
 		//check if we finished one of the sections:
-		if (old_qid === 8 ||old_qid == 19) {
+		if (old_qid === 8 ||old_qid === 19) {
 			foodDone = true;
-		} else if (old_qid === 9 ||old_qid == 20) {
+		} else if (old_qid === 10 ||old_qid === 20) {
 			careDone = true;
-		} else if (old_qid === 12 ||old_qid == 21) {
+		} else if (old_qid === 12 ||old_qid === 21) {
 			homeDone = true;
 		}
 	}
 
-	if (next_qid != 3 && next_qid != 18){
+	if (next_qid === 100 ) {
+		goToLoading();
+	}
+	else if (next_qid != 3 && next_qid != 18){
 		displayQuestion(next_qid);
-	} else {
+	} 
+	else {
 		updateCategoriesFinished(old_qid);
 		var id = handleCategoryFinished(next_qid);
 
@@ -208,11 +211,21 @@ function findNextQuestion(next_qid, old_qid) {
 }
 
 function displayDashboard(id) {
+	console.log(homeDone, careDone, foodDone);
 	selected_question = id;
 
-	if (homeDone) colorButton(answer_c, "green");
-	if (careDone) colorButton(answer_b, "green");
-	if (foodDone) colorButton(answer_a, "green");
+	if (homeDone) {
+		colorButton(answer_c, "green");
+	}
+	
+	if (careDone) {
+		colorButton(answer_b, "green");
+	}
+	
+
+	if (foodDone) {
+		colorButton(answer_a, "green");
+	}
 
 	var txt = questions[id].text,
 		a = questions[id].answerA.text,
@@ -227,7 +240,7 @@ function displayDashboard(id) {
 }
 
 function goToLoading() {
-	window.location.href = "loading.html";
+	window.location.href = "loading.html"
 }
 
 function goToFinal() {
@@ -240,7 +253,8 @@ function resetButtons() {
 	colorButton(answer_c, "#99a2a2");
 }
 
-function colorButton(button, color, disable){
+function colorButton(button, color){
+	button.select("rect").stop();
 	button.select("rect").attr({"fill": color});
 }
 
@@ -268,29 +282,48 @@ function displayQuestion(id) {
 
 
 //---------------------------------- UPDATE STATE ------------------------------------------------
-function updateForAnswer(answer) {
-	var state = states[answer.delay] ? states[answer.delay] : new State(0, 0, 0);
-	state.earth += answer.earth;
-	state.business += answer.business;
-	state.news_ids.push(answer.news_id);
-	states[answer.delay] = state;
+function processAnswer(answer) {
+	var state = states[answer.delay] ? addToState(answer, states[answer.delay]) : createNewState(answer);
+  
+	function createNewState(answer) {
+		return new State(answer.earth, answer.business, [answer.news_id]);
+	}
 
-	updateStates();
+	function addToState(answer, old) {
+	var ids = old.news_ids
+	ids.push(answer.news_id);
+		return new State(old.earth + answer.earth, old.business + answer.business, ids);
+	}
+  
+  //add state back to array
+  states[answer.delay] = state
+  updateState();
 }
 
-function updateStates(){
-	var current_state = states.pop();
 
-	if (current_state !=  null) {
-		global_state.earth += current_state.earth;
-		global_state.business += current_state.business;
-
+function updateState(){
+	function updateNewsBanner(state) {
 		var news_str = " --- Breaking News --- ";
 		current_state.news_ids.forEach( function (id) {
 			str = newsArray[id] ? newsArray[id].text : "";
 			news_str += str;
 		});
 		newsText.select("text").attr({"text": news_str});
+	}
+
+	function updateGlobe() {
+
+	}
+
+	function updateBusiness() {
+
+	}
+	
+	var current_state = states.shift();
+	if (current_state !=  null) {
+		global_state.earth += current_state.earth;
+		global_state.business += current_state.business;
+		updateNewsBanner(current_state);
 	}
 }
 
@@ -342,7 +375,7 @@ function setUp(){
 		changeBackgroundColor("grey", "#99a2a2", answer_a.select("rect"));
 		var a = questions[selected_question].answerA,
 				next = a.next;
-		updateForAnswer(a);
+		processAnswer(a);
 		findNextQuestion(next, selected_question);
 	};
 
@@ -350,7 +383,7 @@ function setUp(){
 		changeBackgroundColor("grey", "#99a2a2", answer_b.select("rect"));
 		var b = questions[selected_question].answerB,
 				next = b.next;
-		updateForAnswer(b);
+		processAnswer(b);
 		findNextQuestion(next, selected_question);
 	};
 
@@ -359,7 +392,7 @@ function setUp(){
 		if (c) {
 			changeBackgroundColor("grey", "#99a2a2", answer_c.select("rect"));
 			var next = c.next;
-			updateForAnswer(c);
+			processAnswer(c);
 			findNextQuestion(next, selected_question);
 		}
 	};
@@ -407,6 +440,7 @@ function animateClouds(){
 		animateCloud(getRandomInt(1,5), wolk);
 	});
 };
+
 
 
 
