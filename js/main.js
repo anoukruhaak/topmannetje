@@ -227,7 +227,7 @@ function findNextQuestion(next_qid, old_qid) {
 		goToLoading();
 	}
 	else if (next_qid === 16) {
-		if global_state.earth > global_state.business {
+		if (global_state.earth > global_state.business) {
 			displayQuestion(next_qid);
 		} else {
 			displayQuestion(26);
