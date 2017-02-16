@@ -39,9 +39,13 @@ body {
 }
 
 .antwoord {
-  text-anchor: middle;
+  width: 60%;
+  transform: translate(40%, 0%);
+  text-align: left;
   font-size: 1.0em;
   font-weight: 400;
   color: #585757;
 }
+
+
 
