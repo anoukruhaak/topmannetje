@@ -44,7 +44,7 @@ class State {
 	}
 }
 
-var global_state = new State(0, 5, []),
+var global_state = new State(5, 5, []),
  	states = [],
  	selected_question = 0,
  	foodDone = false,
@@ -80,7 +80,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 
 //Food groen
 {"id": 4, "text": "Je verkoopt worst en ijs, maar vlees en zuivel zijn een zware belasting voor het milieu. Je besluit:", "answerA": new Answer(4.1, "Voor 2020 alle vlees en zuivel te vervangen door veganistische alternatieven", 5, -2, 3, 0, 6), 
-"answerB": new Answer(4.2, "Een vegetarische variant op de Unox-worst te introduceren", 0, 0, 0, 0, 5),
+"answerB": new Answer(4.2, "Een vegetarische variant op de Unox-worst te introduceren", 0, -2, 0, 0, 5),
 "answerC": new Answer(4.3, "Samen te werken met het Vegetarisch Verbond, maar niet minder vlees te verkopen.",-2, 4, 0, 0, 5)},
 
 {"id": 5, "text": "Weet je het zeker? Unox is cultureel erfgoed!", "answerA": new Answer(5.1, "Klopt, ik kies voor zeker. Unox blijft Unox.", -2, 3, 0, 0, 6), 
@@ -116,7 +116,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerC": new Answer(11.3, "Natuurlijk. En ik besteed 1 procent van mijn zeepwinst aan extra gezondheidszorg.", 2, -1, 0, 0, 12)},
 
 {"id": 12, "text": "India is een veelbelovende markt, maar veel Indiërs kunnen de grote pakken waspoeder nog niet betalen.", 
-"answerA": new Answer(12.1, "Ik verander niets aan mijn verpakkingen. Dan maar iets minder omzet.", 1, -2, 0, 0, 3), 
+"answerA": new Answer(12.1, "Ik verander niets aan mijn verpakkingen. Dan maar iets minder omzet.", 1, -3, 0, 0, 3), 
 "answerB": new Answer(12.2, "Ik kom met kleine wegwerpverpakkingen voor een enkele wasbeurt", -4, 3, 0, 0, 3), 
 "answerC": new Answer(12.3, "Losse verpakkingen zijn overbodig. Ik verkoop via hervulbare containers.", 2, 1, 0, 0, 3)},
 
@@ -324,50 +324,51 @@ function displayQuestion(id) {
 function showFactories(small, middle, big) {
 	var kl = small ? "" : "hidden",
 		mi = middle ? "" : "hidden",
-		gr = big ? "" : "hidden";
+		gr = big ? "" : "hidden",
+		kl_op = small ? 1 : 0;
+		mi_op = middle ? 1 :0;
+		gr_op = big ? 1 : 0;
 
-	fabriek_kl.attr({visibility: kl});
-	fabriek_mi.attr({visibility: mi});
-	fabriek_gr.attr({visibility: gr});
+	fabriek_kl.animate({opacity: kl_op}, 1000, mina.easeinout, function () {
+		fabriek_kl.attr({visibility: kl});
+	});
+
+	fabriek_mi.animate({opacity: mi_op}, 1000, mina.easeinout, function () {
+		fabriek_mi.attr({visibility: mi});
+	});
+
+	fabriek_gr.animate({opacity: gr_op}, 1000, mina.easeinout, function () {
+		fabriek_gr.attr({visibility: gr});
+	});
 }
 
 function showGlobe(number) {
-
-	function showGlobeElements(boom, vlammen, wolken) {
-		var bm = boom ? "" : "hidden",
-			vl = vlammen ? "" : "hidden",
-			wl = wolken ? "" : "hidden"
-
+	var bm = (number === 0) ? "" : "hidden",
+		vl = (number === 3) ? "" : "hidden",
+		wl = ((number === 2) || (number === 3)) ? "" : "hidden",
+		bm_op = (number === 0) ? 1 : 0,
+		vl_op = (number === 3) ? 1 : 0,
+		wl_op = ((number === 2) || (number === 3)) ? 1 : 0;
+		
+	globe_trees.animate({opacity: bm_op}, 1000, mina.easeinout, function () {
 		globe_trees.attr({visibility: bm});
+	});
+
+	globe_clouds.animate({opacity: wl_op}, 1000, mina.easeinout, function () {
 		globe_clouds.attr({visibility: wl});
+	});
+	
+	globe_flames.animate({opacity: vl_op}, 1000, mina.easeinout, function () {
 		globe_flames.attr({visibility: vl});
-	}
+	});
+}
 
-	var blue1 = "#",
-		blue2 = "#",
-		blue3 = "#",
-		earth1 = "#",
-		earth2 = "#",
-		earth3 = "#";
+function colorGlobe(number) {
+	var blue = ["#5181A9", "#5181a9", "#4D7184", "#485A68"][number],
+	earth = ["#3B5323", "#ead7b7", "#D2C0A7", "#8A7570"][number];
 
-	switch(number) {
-		case 1:
-			showGlobeElements(true, false, false);
-			break;
-		case 2:
-		//Start globe
-			showGlobeElements(false, false, false);
-			break;
-		case 3:
-			showGlobeElements(false, false, true);
-			break;
-		case 4:
-			showGlobeElements(false, true, true);
-		 	break;
-		default: 
-			showGlobeElements(false, false, false);
-			break;
-	}
+	globe_bg.animate({fill: earth}, 2000, mina.easeinout, null);
+	globe_water.animate({fill: blue}, 2000, mina.easeinout, null);
 }
 
 function processAnswer(answer) {
@@ -384,7 +385,7 @@ function processAnswer(answer) {
 	}
   
   //add state back to array
-  states[answer.delay] = state
+  states[answer.delay] = state;
   updateState();
 }
 
@@ -400,18 +401,33 @@ function updateState(){
 	}
 
 	function updateGlobe(points) {
-		if (points > 9) {
-		} else if (points > 5) {
+
+		console.log("globe points" + points);
+		if (points > 18) {
+			showGlobe(0);
+			colorGlobe(0);
+
+		} else if (points > 13) {
 			showGlobe(1);
+			colorGlobe(0);
 
-		} else if (points > 0) {
+		} else if (points > 8){
+			showGlobe(1);
+			colorGlobe(1);
+		}
+
+		else if (points > 3) {
 			showGlobe(2);
+			colorGlobe(1);
+		}
 
-		} else if (points > -3) {
-			showGlobe(3);
+		else if (points > -1) {
+			showGlobe(2);
+			colorGlobe(2);
 
 		} else {
-			showGlobe(4);
+			showGlobe(3);
+			colorGlobe(3);
 		}
 	}
 
@@ -474,10 +490,11 @@ function setUp(){
 	koffer.drag();
 	newsText.select("text").attr({"font-size": "16px", "font-family": "Catamaran, sans-serif", "font-style": "regular"});
 	showFactories(true, true, false);
+	showGlobe(2);
+	colorGlobe(1);
 	// var animBack = function () {koffer.animate({transform: "rotate(20 100 0)"}, 2000, mina.easeinout, null)};
 	// var anim = function () {koffer.animate({transform: "rotate(20 100 100 )"}, 2000, mina.easeinout, animBack)};
 	// anim();
-	showGlobe(2);
 	function changeBackgroundColor(newColor, oldColor, surface) {
 		surface.animate({fill: newColor}, 200, mina.easeinout, function() {
 			surface.animate({fill: oldColor}, 200, mina.easeinout, null);
