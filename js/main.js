@@ -6,6 +6,10 @@
  	answer_c = s.select("g[id='c']"),
  	trophee1 = s.select("g[id='kikker-beker']"),
  	koffer = s.select("g[id='koffer']"),
+ 	globe = s.select("g[id='globe']"),
+ 	fabriek_gr = s.select("g[id='fabriek-groot']"),
+ 	fabriek_kl = s.select("g[id='fabriek-klein']"),
+ 	fabriek_mi = s.select("g[id='fabriek-midden']"),
  	newsText = s.select("g[id='news-tekst']");
 
 class Answer {
@@ -35,7 +39,7 @@ class State {
 	}
 }
 
-var global_state = new State(0, 0, []),
+var global_state = new State(0, 5, []),
  	states = [],
  	selected_question = 0,
  	foodDone = false,
@@ -312,6 +316,16 @@ function displayQuestion(id) {
 
 
 //---------------------------------- UPDATE STATE ------------------------------------------------
+function showFactories(small, middle, big) {
+	var kl = small ? "" : "hidden",
+		mi = middle ? "" : "hidden",
+		gr = big ? "" : "hidden";
+
+	fabriek_kl.attr({visibility: kl});
+	fabriek_mi.attr({visibility: mi});
+	fabriek_gr.attr({visibility: gr});
+}
+
 function processAnswer(answer) {
 	var state = states[answer.delay] ? addToState(answer, states[answer.delay]) : createNewState(answer);
   
@@ -341,18 +355,27 @@ function updateState(){
 		newsText.select("text").attr({"text": news_str});
 	}
 
-	function updateGlobe() {
+	function updateGlobe(points) {
+
 
 	}
 
-	function updateBusiness() {
+	function updateBusiness(points) {
+			if (points > 7) {
+			showFactories(true, true, true);
 
+		} else if (points < 2) {
+			showFactories(true, false, false);
+		} else {
+			showFactories(true, true, false);
+		}
 	}
 	
 	var current_state = states.shift();
 	if (current_state !=  null) {
 		global_state.earth += current_state.earth;
 		global_state.business += current_state.business;
+		updateBusiness(global_state.business);
 
 		if (current_state.news_ids.length > 0) {
 			updateNewsBanner(current_state);
@@ -394,7 +417,7 @@ function setUp(){
 	trophee1.drag();
 	koffer.drag();
 	newsText.select("text").attr({"font-size": "16px", "font-family": "Catamaran, sans-serif", "font-style": "regular"});
-
+	showFactories(true, true, false);
 	// var animBack = function () {koffer.animate({transform: "rotate(20 100 0)"}, 2000, mina.easeinout, null)};
 	// var anim = function () {koffer.animate({transform: "rotate(20 100 100 )"}, 2000, mina.easeinout, animBack)};
 	// anim();
