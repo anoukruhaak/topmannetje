@@ -7,6 +7,11 @@
  	trophee1 = s.select("g[id='kikker-beker']"),
  	koffer = s.select("g[id='koffer']"),
  	globe = s.select("g[id='globe']"),
+ 	globe_water = globe.select("circle[id='globe-water']"),
+ 	globe_bg = globe.select("path[id='globe-bg']"),
+ 	globe_clouds = s.select("g[id='w3-wolk']"),
+ 	globe_trees = s.select("g[id='boompjes']"),
+ 	globe_flames = s.select("g[id='vlam']"),
  	fabriek_gr = s.select("g[id='fabriek-groot']"),
  	fabriek_kl = s.select("g[id='fabriek-klein']"),
  	fabriek_mi = s.select("g[id='fabriek-midden']"),
@@ -326,6 +331,45 @@ function showFactories(small, middle, big) {
 	fabriek_gr.attr({visibility: gr});
 }
 
+function showGlobe(number) {
+
+	function showGlobeElements(boom, vlammen, wolken) {
+		var bm = boom ? "" : "hidden",
+			vl = vlammen ? "" : "hidden",
+			wl = wolken ? "" : "hidden"
+
+		globe_trees.attr({visibility: bm});
+		globe_clouds.attr({visibility: wl});
+		globe_flames.attr({visibility: vl});
+	}
+
+	var blue1 = "#",
+		blue2 = "#",
+		blue3 = "#",
+		earth1 = "#",
+		earth2 = "#",
+		earth3 = "#";
+
+	switch(number) {
+		case 1:
+			showGlobeElements(true, false, false);
+			break;
+		case 2:
+		//Start globe
+			showGlobeElements(false, false, false);
+			break;
+		case 3:
+			showGlobeElements(false, false, true);
+			break;
+		case 4:
+			showGlobeElements(false, true, true);
+		 	break;
+		default: 
+			showGlobeElements(false, false, false);
+			break;
+	}
+}
+
 function processAnswer(answer) {
 	var state = states[answer.delay] ? addToState(answer, states[answer.delay]) : createNewState(answer);
   
@@ -356,12 +400,23 @@ function updateState(){
 	}
 
 	function updateGlobe(points) {
+		if (points > 9) {
+		} else if (points > 5) {
+			showGlobe(1);
 
+		} else if (points > 0) {
+			showGlobe(2);
 
+		} else if (points > -3) {
+			showGlobe(3);
+
+		} else {
+			showGlobe(4);
+		}
 	}
 
 	function updateBusiness(points) {
-			if (points > 7) {
+		if (points > 7) {
 			showFactories(true, true, true);
 
 		} else if (points < 2) {
@@ -376,6 +431,7 @@ function updateState(){
 		global_state.earth += current_state.earth;
 		global_state.business += current_state.business;
 		updateBusiness(global_state.business);
+		updateGlobe(global_state.earth);
 
 		if (current_state.news_ids.length > 0) {
 			updateNewsBanner(current_state);
@@ -421,7 +477,7 @@ function setUp(){
 	// var animBack = function () {koffer.animate({transform: "rotate(20 100 0)"}, 2000, mina.easeinout, null)};
 	// var anim = function () {koffer.animate({transform: "rotate(20 100 100 )"}, 2000, mina.easeinout, animBack)};
 	// anim();
-
+	showGlobe(2);
 	function changeBackgroundColor(newColor, oldColor, surface) {
 		surface.animate({fill: newColor}, 200, mina.easeinout, function() {
 			surface.animate({fill: oldColor}, 200, mina.easeinout, null);
