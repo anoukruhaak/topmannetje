@@ -27,8 +27,15 @@ body {
 
 .main-svg {
   position: absolute;
-  z-index: -1;
+  z-index: 1;
   top:0;
+}
+
+.duurzaam-svg {
+  position: absolute;
+  z-index: 20;
+  top:0;
+  pointer-events: none;
 }
 
 .vraag {

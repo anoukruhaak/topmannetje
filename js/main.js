@@ -17,6 +17,10 @@
  	fabriek_mi = s.select("g[id='fabriek-midden']"),
  	newsText = s.select("g[id='news-tekst']");
 
+ // var d = Snap("#duurzaamheidsman"),
+ // 	legs = d.select("g[id='been']");
+ var d = Snap("#duurzaamheid");
+
 class Answer {
 	constructor(id, text, earth, business, news_id, delay, next) {
 		this.id = id;
@@ -71,11 +75,11 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 {"id": 1, "text": "Gefeliciteerd! Je bent topman van Unilever. De planeet kreunt onder jouw productie. Je eerste besluit:", "answerA": new Answer(1.1, "Ik gooi het roer om en kies voor een volledig duurzame productie", 1, 0, 0, 0, 2), 
 "answerB": new Answer(1.2, "Ik kan dit niet oplossen. We onderzoeken vergroening maar draaien voorlopig op de oude voet door.", -1, 1, 2, 0, 17), 
 "answerC": null, 
-"audio": "applause.mp3", "animation": null}, 
+"audio": "audio/applause.mp3", "animation": null}, 
 
 //Start Groen
-{"id": 2, "text": "Mooi. Laat je de fabrieken volledig draaien op duurzame energie?", "answerA": new Answer(2.1, "Ja, ik stap direct over op volledig groene stroom en bio-brandstof.", 2, 2, 0, 0, 3), 
-"answerB": new Answer(2.2, "Groene subsidies zijn onzeker; ik begin met 10 procent groen.", 0, 0, 2, 0, 17), 
+{"id": 2, "text": "Mooi. Laat je de fabrieken volledig draaien op duurzame energie?", "answerA": new Answer(2.2, "Groene subsidies zijn onzeker; ik begin met 10 procent groen.", 0, 0, 2, 0, 17), 
+"answerB": new Answer(2.1, "Ja, ik stap direct over op volledig groene stroom en bio-brandstof.", 2, 2, 0, 0, 3), 
 "answerC": null,
 "audio": null, "animation": null},
 
@@ -86,10 +90,10 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "audio": null, "animation": null},
 
 //Food groen
-{"id": 4, "text": "Je verkoopt worst en ijs, maar vlees en zuivel zijn een zware belasting voor het milieu. Je besluit:", "answerA": new Answer(4.1, "Voor 2020 alle vlees en zuivel te vervangen door veganistische alternatieven", 5, -2, 3, 0, 6), 
+{"id": 4, "text": "Je duurzaamheidsmanager waarschuwt dat jouw worst en ijs een zware belasting zijn voor het milieu. Je besluit:", "answerA": new Answer(4.1, "Voor 2020 alle vlees en zuivel te vervangen door veganistische alternatieven", 5, -2, 3, 0, 6), 
 "answerB": new Answer(4.2, "Een vegetarische variant op de Unox-worst te introduceren", 0, -2, 0, 0, 5),
 "answerC": new Answer(4.3, "Samen te werken met het Vegetarisch Verbond, maar niet minder vlees te verkopen.",-2, 4, 0, 0, 5),
-"audio": null, "animation": null},
+"audio": "audio/duck.mp3", "animation": animateSustainableMan},
 
 {"id": 5, "text": "Weet je het zeker? Unox is cultureel erfgoed!", "answerA": new Answer(5.1, "Klopt, ik kies voor zeker. Unox blijft Unox.", -2, 3, 0, 0, 6), 
 "answerB": new Answer(5.2, "Ik blijf bij mijn besluit: vegetarische worst.", 3, -2, 4, 1, 6), 
@@ -107,9 +111,9 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "audio": null, "animation": null},
 
 //Animation: verschuif de koffer met certificaten.
-{"id": 8, "text": "De groenten in je soep en pastasaus moeten duurzaam. Hoe pak je dat aan?", "answerA": new Answer(8.1, "Ik ga in zee met veel kleine lokaal werkende boeren.", 3, -1, 0, 2, 3), 
+{"id": 8, "text": "De groenten in je soep en pastasaus moeten duurzaam. Hoe pak je dat aan?", "answerA": new Answer(8.3, "Ik vergroen op mijn eigen manier en bedenk een nieuw keurmerk.", -2, 2, 5, 1, 3), 
 "answerB": new Answer(8.2, "Ik verplicht leveranciers biologisch te produceren.", 3, -2, 0, 0, 3), 
-"answerC": new Answer(8.3, "Ik vergroen op mijn eigen manier en bedenk een nieuw keurmerk.", -2, 2, 5, 1, 3),
+"answerC": new Answer(8.1, "Ik ga in zee met veel kleine lokaal werkende boeren.", 3, -1, 0, 2, 3), 
 "audio": null, "animation": null},
 
 //Personal Groen
@@ -126,16 +130,16 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 
 //Home Groen
 {"id": 11, "text": "Kans: De Wereldgezondheidsorganisatie kan diarree bij kinderen in Kenia voorkomen met een 'was je handen' campagne. Ga je zeep doneren?", 
-"answerA": new Answer(11.1, "Ja, het is een goed doel én het versterkt mijn merk.", 1, 1, 0, 0, 12), 
-"answerB": new Answer(11.2, "Nee, als bedrijf is dit niet mijn taak.", -1, -1, 0, 0, 12), 
+"answerA": new Answer(11.2, "Nee, als bedrijf is dit niet mijn taak.", -1, -1, 0, 0, 12), 
+"answerB": new Answer(11.1, "Ja, het is een goed doel én het versterkt mijn merk.", 1, 1, 0, 0, 12), 
 "answerC": new Answer(11.3, "Natuurlijk. En ik besteed 1 procent van mijn zeepwinst aan extra gezondheidszorg.", 2, -1, 0, 0, 12),
-"audio": "children.mp3", "animation": null},
+"audio": "audio/children.mp3", "animation": null},
 
 {"id": 12, "text": "India is een veelbelovende markt, maar veel Indiërs kunnen de grote pakken waspoeder nog niet betalen.", 
-"answerA": new Answer(12.1, "Ik verander niets aan mijn verpakkingen. Dan maar iets minder omzet.", 1, -3, 0, 0, 3), 
-"answerB": new Answer(12.2, "Ik kom met kleine wegwerpverpakkingen voor een enkele wasbeurt", -4, 3, 0, 0, 3), 
+"answerA": new Answer(12.2, "Ik kom met kleine wegwerpverpakkingen voor een enkele wasbeurt", -4, 3, 0, 0, 3),  
+"answerB": new Answer(12.1, "Ik verander niets aan mijn verpakkingen. Dan maar iets minder omzet.", 1, -3, 0, 0, 3),
 "answerC": new Answer(12.3, "Losse verpakkingen zijn overbodig. Ik verkoop via hervulbare containers.", 2, 1, 0, 0, 3),
-"audio": "india.mp3", "animation": null},
+"audio": "audio/india.mp3", "animation": null},
 
 
 //Eind groen
@@ -145,17 +149,17 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerC": new Answer(13.3, "Ik respecteer de cultuur van het land: werkende kinderen zijn daar heel normaal.", -2, 1, 0, 0, 14),
 "audio": null, "animation": null},
 
-{"id": 14, "text": "De vraag naar luxe ijsjes neemt toe in Nigeria. Pak je die kans?", 
+{"id": 14, "text": "Volgens je marketingmanager neemt de vraag naar luxe ijsjes toe in Nigeria. Pak je die kans?", 
 "answerA": new Answer(14.1, "Natuurlijk: iedereen heeft recht op Magnums. Ik bestel alvast 20 duizend extra diepvriezers", -2, 3, 0, 0, 15), 
 "answerB": new Answer(14.2, "Ik promoot ‘Jane and jerry’ vruchtenijs op waterbasis; zonder zuivel met lokaal fruit.", 0, 0, 0, 0, 15), 
 "answerC": new Answer(14.3, "We bouwen onze ijs-divisie af", 2, -4, 0, 0, 15),
-"audio": null, "animation": null},
+"audio": "audio/duck.mp3", "animation": animateMarketingMan},
 
 {"id": 15, "text": "Greenpeace komt met een rapport over ontbossing door palmolieplantages waar jij inkoopt. Wat doe je?", 
 "answerA": new Answer(15.1, "Je haalt palmolie waar mogelijk uit je producten.", 2, -1, 0, 0, 16), 
 "answerB": new Answer(15.2, "Je bedankt voor het rapport en stelt een samenwerking voor.", -1, 1, 0, 0, 16), 
 "answerC": new Answer(15.2, "Je kaart de kwestie aan bij de volgende vergadering van de Roundtable for Sustainable Palm Oil.", -1, 1, 0, 0, 16),
-"audio": "rain_forest.mp3", "animation": null},
+"audio": "audio/rain_forest.mp3", "animation": null},
 
 {"id": 16, "text": "Al die duurzaamheid is niet goed voor je balans. Je aandeelhouders zijn boos. Wat doe je?", 
 "answerA": new Answer(16.1, "Je ontslaat je VP.", 1, -1, 0, 0, 100), 
@@ -208,7 +212,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(23.1, "Je verhoogt het budget van je PR-afedeling met 1 miljoen", -1, 0, 0, 0, 100), 
 "answerB": new Answer(23.2, "Je verhoogt het budget van je PR-afedeling met 20 miljoen", -3, 1, 0, 0, 100), 
 "answerC": new Answer(23.3, "Je sleept Greenpeace voor de rechter", -3, -1, 0, 0, 100),
-"audio": "monkey.mp3", "animation": null},
+"audio": "audio/monkey.mp3", "animation": null},
 
 //Duurzaam eind
 {"id": 24, "text": "Het gaat zo slecht met je bedrijfsvoering dat een concurrent dreigt met een vijandelijke overname. Wat doe je?", 
@@ -336,7 +340,8 @@ function displayQuestion(id) {
 		a = questions[id].answerA.text,
 		b = questions[id].answerB.text,
 		c = questions[id].answerC,
-		audio = questions[id].audio; 
+		audio = questions[id].audio,
+		animation = questions[id].animation; 
 	document.getElementById('vraag').innerHTML = txt;
 	document.getElementById('antw_a').innerHTML = a;
 	document.getElementById('antw_b').innerHTML = b;
@@ -350,10 +355,14 @@ function displayQuestion(id) {
 		answer_c.attr({display: ''});
 	}
 
-	if (audio != null){
+	if (audio){
 		var file = new Audio(audio);
 		file.play();
-	}	
+	}
+
+	if (animation) {
+		animation();
+	}
 };
 
 
@@ -537,7 +546,8 @@ function breakNews () {
 
 
 function setUp(){
-
+	setElementAboveScreen(d);
+	// d.attr({visibility: "hidden"});
 	help.mouseover(animateHelpButton,resetSVG);
 	trophee1.drag();
 	koffer.drag();
@@ -549,6 +559,7 @@ function setUp(){
 	// var animBack = function () {koffer.animate({transform: "rotate(20 100 0)"}, 2000, mina.easeinout, null)};
 	// var anim = function () {koffer.animate({transform: "rotate(20 100 100 )"}, 2000, mina.easeinout, animBack)};
 	// anim();
+
 	function changeBackgroundColor(newColor, oldColor, surface) {
 		surface.animate({fill: newColor}, 200, mina.easeinout, function() {
 			surface.animate({fill: oldColor}, 200, mina.easeinout, null);
@@ -601,6 +612,8 @@ function setUp(){
 
 };
 
+
+
 function animateClouds(){
 	function getRandomInt(min, max) {
 	  min = Math.ceil(min);
@@ -626,7 +639,40 @@ function animateClouds(){
 	});
 };
 
+function animateMoveDown(elem){
+	var startMatrix = new Snap.Matrix(),
+		endMatrix = new Snap.Matrix();
+		startMatrix.translate(0, -680);
+		endMatrix.translate(0, -680);
+		startMatrix.translate(0, 500);
 
+	elem.attr({opacity: 1});
+	elem.animate({transform: startMatrix}, 1500, mina.easein, function () {
+		elem.animate({transform: endMatrix}, 2500, mina.easeout, function () {
+			elem.animate({opacity: 0}, 1, mina.easeinout, null);
+		});
+	});
+}
+
+function animateMarketingMan() {
+	console.log("marketing");
+}
+
+function animateSustainableMan() {
+	animateMoveDown(d);
+}
+
+
+function displayPopup(text, action) {
+
+}
+
+function setElementAboveScreen(elem) {
+	var matrix = new Snap.Matrix();
+	matrix.translate(0, -680);
+	elem.transform(matrix);
+	elem.attr({opacity: 0});
+}
 
 
 setUp();
