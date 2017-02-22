@@ -573,7 +573,6 @@ function setUp(){
 	
 	help.node.onclick = function () {
 		animateMoveDown(r);
-		$('audio').AudioPlayerV1('pause');
 		var voicemail = new Audio("audio/voicemail.mp3");
 		voicemail.play();
 	};
