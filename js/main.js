@@ -652,8 +652,8 @@ function animateClouds(){
 function animateMoveDown(elem){
 	var startMatrix = new Snap.Matrix(),
 		endMatrix = new Snap.Matrix();
-		startMatrix.translate(-150, -680);
-		endMatrix.translate(-150, -680);
+		startMatrix.translate(-100, -600);
+		endMatrix.translate(-100, -600);
 		startMatrix.translate(150, 500);
 
 	elem.attr({opacity: 1});
@@ -679,7 +679,7 @@ function displayPopup(text, action) {
 
 function setElementAboveScreen(elem) {
 	var matrix = new Snap.Matrix();
-	matrix.translate(-150, -650);
+	matrix.translate(-100, -600);
 	elem.transform(matrix);
 	elem.attr({opacity: 0});
 }
