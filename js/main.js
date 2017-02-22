@@ -83,7 +83,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 {"id": 2, "text": "Mooi. Laat je de fabrieken volledig draaien op duurzame energie?", "answerA": new Answer(2.2, "Groene subsidies zijn onzeker; ik begin met 10 procent groen.", 0, 0, 2, 0, 17), 
 "answerB": new Answer(2.1, "Ja, ik stap direct over op volledig groene stroom en bio-brandstof.", 2, 2, 0, 0, 3), 
 "answerC": null,
-"audio": null, "animation": null},
+"audio": null, "animation": bounceHulpButton},
 
 //Keuze
 {"id": 3, "text": "Welke divisie pak je als eerste aan?", "answerA": new Answer(3.1, "Voeding", 0, 0, 0, 0, 4), 
@@ -110,7 +110,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 {"id": 7, "text": "Zeker weten? IJsjes zijn bevroren blokjes zuivel en suiker.", "answerA": new Answer(7.1, "Daar verzin ik wel wat op", -3, 2, 0, 4, 8), 
 "answerB": new Answer(7.2, "Oeps, dan toch maar niet", 2, -1, 0, 0, 8), 
 "answerC": null,
-"audio": null, "animation": null},
+"audio": null, "animation": bounceHulpButton},
 
 //Animation: verschuif de koffer met certificaten.
 {"id": 8, "text": "De groenten in je soep en pastasaus moeten duurzaam. Hoe pak je dat aan?", "answerA": new Answer(8.3, "Ik vergroen op mijn eigen manier en bedenk een nieuw keurmerk.", -2, 2, 5, 1, 3), 
@@ -168,14 +168,14 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(16.1, "Je ontslaat je VP.", 1, -1, 0, 0, 100), 
 "answerB": new Answer(16.2, "Je stapt op.", -1, -1, 0, 0, 100), 
 "answerC": new Answer(16.3, "Je past je strategie aan. Dan maar minder duurzaam", -5, 5, 0, 0, 100),
-"audio": null, "animation": null},
+"audio": null, "animation": bounceHulpButton},
 
 //Fossiel start
 {"id": 17, "text": "Volgens marktonderzoek gaat het niet goed met de reputatie van je bedrijf. Tijd voor nieuwe slogan. Wat wordt het? ", 
 "answerA": new Answer(17.1, "We doen ons best, iets beter dan de rest.", 0, 1, 0, 0, 18), 
 "answerB": new Answer(17.2, "Deal with it", 0, 0, 0, 0, 18), 
 "answerC": new Answer(17.3, "Doe maar lekker duurzaam", 0, 1, 0,0, 18),
-"audio": null, "animation": null},
+"audio": null, "animation": bounceHulpButton},
 
 {"id": 18, "text": "Welke divisie pas je als eerste aan?", 
 "answerA": new Answer(18.1, "Voeding", 0, 0, 0, 0, 19), 
@@ -195,7 +195,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(20.1, "Je stuurt je slimste lobbyisten naar Brussel om de definitie van plastic in de wet op te rekken. ", -4, 3, 0, 0, 18), 
 "answerB": new Answer(20.2, "Je vraagt je beste chemici om een plastic-vrije shampoo te creëren.", 1, -1, 0, 0, 18), 
 "answerC": null,
-"audio": null, "animation": null},
+"audio": null, "animation": bounceHulpButton},
 
 //Fossiel home
 {"id": 21, "text": "Memo van marketing: mensen wassen minder vaak hun handen - jouw zeep wordt minder verkocht. Wat doe je?", 
@@ -209,7 +209,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(22.1, "\'De plantages zijn niet van ons: de Indonesische regering is verantwoordelijk\'", -4, -1, 0, 0, 23), 
 "answerB": new Answer(22.2, "\‘De beschuldiging van Amnesty is onbewezen maar we verwelkomen de kritiek\’", -4, 1, 0, 0, 23), 
 "answerC": new Answer(22.3, "\‘Alle relaties met beschuldigde plantagehouders worden stopgezet tot tegendeel bewezen is\’",  3, -2, 0, 0, 23),
-"audio": null, "animation": null},
+"audio": null, "animation": bounceHulpButton},
 
 {"id": 23, "text": "\'Palmolie doodt orang-oetans,\’ stelt Greenpeace. Wat doe je?", 
 "answerA": new Answer(23.1, "Je verhoogt het budget van je PR-afedeling met 1 miljoen", -1, 0, 0, 0, 100), 
@@ -683,6 +683,22 @@ function setElementAboveScreen(elem) {
 	matrix.translate(-100, -600);
 	elem.transform(matrix);
 	elem.attr({opacity: 0});
+}
+
+function bounceHulpButton() {
+	var startMatrix = new Snap.Matrix(),
+		midMatrix = new Snap.Matrix(),
+		endMatrix = new Snap.Matrix();
+		endMatrix.translate(0, 0);
+		startMatrix.translate(0, -5);
+		midMatrix.translate(0, 5);
+
+	help.stop();
+	help.animate({transform: startMatrix}, 1000, mina.bounce, function () {
+		help.animate({transform: midMatrix}, 1000, mina.bounce, function () {
+			help.animate({transform: endMatrix}, 1000, mina.bounce, null);
+		});
+	});	
 }
 
 
