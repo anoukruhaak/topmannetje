@@ -89,7 +89,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 {"id": 3, "text": "Welke divisie pak je als eerste aan?", "answerA": new Answer(3.1, "Voeding", 0, 0, 0, 0, 4), 
 "answerB": new Answer(3.2, "Cosmetica en verzorgingsproducten", 0, 0, 0, 0, 9), 
 "answerC": new Answer(3.3, "Wasmiddelen en reiniging", 0, 0, 0, 0, 11),
-"audio": null, "animation": null},
+"audio": null, "animation": gameOver},
 
 //Food groen
 {"id": 4, "text": "Waarschuwing van je duurzaamheidsmanager: jouw worst en ijs zijn een zware belasting voor het milieu. Je besluit:", "answerA": new Answer(4.1, "Voor 2020 alle vlees en zuivel te vervangen door veganistische alternatieven", 5, -2, 3, 0, 6), 
@@ -552,7 +552,7 @@ function setUp(){
 	setElementAboveScreen(d);
 	setElementAboveScreen(m);
 	setElementAboveScreen(r);
-	// d.attr({visibility: "hidden"});
+
 	help.mouseover(animateHelpButton,resetSVG);
 	trophee1.drag();
 	koffer.drag();
@@ -561,9 +561,6 @@ function setUp(){
 	showFactories(true, true, false);
 	showGlobe(2);
 	colorGlobe(1);
-	// var animBack = function () {koffer.animate({transform: "rotate(20 100 0)"}, 2000, mina.easeinout, null)};
-	// var anim = function () {koffer.animate({transform: "rotate(20 100 100 )"}, 2000, mina.easeinout, animBack)};
-	// anim();
 
 	function changeBackgroundColor(newColor, oldColor, surface) {
 		surface.animate({fill: newColor}, 200, mina.easeinout, function() {
@@ -603,6 +600,8 @@ function setUp(){
 		}
 	};
 
+	// document.getElementById("popup").style.display = "none";
+	gameOver();
 	function moveNewsBanner () {
 		var startMatrix = new Snap.Matrix(),
 		midMatrix = new Snap.Matrix();
@@ -615,13 +614,10 @@ function setUp(){
 				moveNewsBanner();
 			});
 		});
-
 	};
 	moveNewsBanner();
 	displayQuestion(0);
-
 };
-
 
 
 function animateClouds(){
@@ -665,6 +661,13 @@ function animateMoveDown(elem){
 	});	
 }
 
+function gameOver() {
+	displayPopup("Game Over", 
+		"Terwijl jij zat de treuzelen is de wereld allang vergaan. Probeer het nog een keer!", function (){
+			document.getElementById('popup').style.display = "none";
+		});
+}
+
 function animateMarketingMan() {
 	animateMoveDown(m);
 }
@@ -674,7 +677,19 @@ function animateSustainableMan() {
 }
 
 
-function displayPopup(text, action) {
+function displayPopup(title, text, action) {
+	var _title = document.getElementById('popup-title'),
+		popup = document.getElementById('popup'),
+		_text = document.getElementById('popup-text');
+
+		console.log(popup);
+	_title.innerHTML = title;
+	_text.innerHTML = text;
+
+	document.getElementById("popup-button").onclick = function() { 
+            action();
+        };
+	popup.style.display = "block";
 
 }
 
