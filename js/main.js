@@ -21,7 +21,7 @@
  // 	legs = d.select("g[id='been']");
  var d = Snap("#duurzaamheid"),
  	 m = Snap("#marketing"),
- 	 r = Snap("#rutte");
+ 	 r = s.select("g[id='rutte']");
 
 class Answer {
 	constructor(id, text, earth, business, news_id, delay, next) {
@@ -573,8 +573,9 @@ function setUp(){
 	
 	help.node.onclick = function () {
 		animateMoveDown(r);
-		var file = new Audio("audio/voicemail.mp3");
-		file.play();
+		$('audio').AudioPlayerV1('pause');
+		var voicemail = new Audio("audio/voicemail.mp3");
+		voicemail.play();
 	};
 	//Setup answer buttons	
 	answer_a.node.onclick = function () {
@@ -656,12 +657,13 @@ function animateMoveDown(elem){
 		endMatrix.translate(-100, -600);
 		startMatrix.translate(150, 500);
 
-	elem.attr({opacity: 1});
-	elem.animate({transform: startMatrix}, 1800, mina.bounce, function () {
+	elem.stop();
+	elem.attr({opacity: 0.5});
+	elem.animate({transform: startMatrix, opacity: 1}, 1800, mina.bounce, function () {
 		elem.animate({transform: endMatrix}, 4000, mina.easeout, function () {
 			elem.animate({opacity: 0}, 1, mina.easeinout, null);
 		});
-	});
+	});	
 }
 
 function animateMarketingMan() {
