@@ -91,7 +91,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 {"id": 3, "text": "Welke divisie pak je als eerste aan?", "answerA": new Answer(3.1, "Voeding", 0, 0, 0, 0, 4), 
 "answerB": new Answer(3.2, "Cosmetica en verzorgingsproducten", 0, 0, 0, 0, 9), 
 "answerC": new Answer(3.3, "Wasmiddelen en reiniging", 0, 0, 0, 0, 11),
-"audio": null, "animation": gameOver},
+"audio": null, "animation": null},
 
 //Food groen
 {"id": 4, "text": "Waarschuwing van je duurzaamheidsmanager: jouw worst en ijs zijn een zware belasting voor het milieu. Je besluit:", "answerA": new Answer(4.1, "Voor 2020 alle vlees en zuivel te vervangen door veganistische alternatieven", 5, -2, 3, 0, 6), 
@@ -665,8 +665,9 @@ function animateMoveDown(elem){
 
 function gameOver() {
 	displayPopup("Game Over", 
-		"Terwijl jij zat de treuzelen is de wereld allang vergaan. Probeer het nog een keer!", function (){
+		"Terwijl jij zat te treuzelen is de wereld allang vergaan. Probeer het nog een keer!", function (){
 			document.getElementById('popup').style.display = "none";
+			restartGame();
 		});
 }
 
@@ -735,6 +736,19 @@ function restartTimer(question_id) {
 			klokText.attr({"text": "00:0"+time});
 		}
 	}, 1000, question_id);
+}
+
+function restartGame() {
+	global_state = new State(5, 5, []),
+ 	states = [],
+ 	selected_question = 0,
+ 	foodDone = false,
+ 	homeDone = false,
+ 	careDone = false,
+ 	earth_state = 4,
+ 	business_state = 2;
+
+ 	setUp();
 }
 
 setUp();
