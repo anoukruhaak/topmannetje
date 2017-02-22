@@ -15,7 +15,9 @@
  	fabriek_gr = s.select("g[id='fabriek-groot']"),
  	fabriek_kl = s.select("g[id='fabriek-klein']"),
  	fabriek_mi = s.select("g[id='fabriek-midden']"),
- 	newsText = s.select("g[id='news-tekst']");
+ 	klokText = s.select("g[id='klok']").select("text"),
+ 	newsText = s.select("g[id='news-tekst']"),
+ 	timer = setInterval(function() {});
 
  // var d = Snap("#duurzaamheidsman"),
  // 	legs = d.select("g[id='been']");
@@ -298,6 +300,7 @@ function findNextQuestion(next_qid, old_qid) {
 function displayDashboard(id) {
 	console.log(homeDone, careDone, foodDone);
 	selected_question = id;
+	restartTimer(id);
 
 	if (homeDone) colorButton(answer_c, "green");
 	if (careDone) colorButton(answer_b, "green");
@@ -338,6 +341,7 @@ function colorButton(button, color){
 
 function displayQuestion(id) {
 	selected_question = id;
+	restartTimer(id);
 	resetButtons();
 	var txt = questions[id].text,
 		a = questions[id].answerA.text,
@@ -600,8 +604,6 @@ function setUp(){
 		}
 	};
 
-	// document.getElementById("popup").style.display = "none";
-	gameOver();
 	function moveNewsBanner () {
 		var startMatrix = new Snap.Matrix(),
 		midMatrix = new Snap.Matrix();
@@ -716,6 +718,24 @@ function bounceHulpButton() {
 	});	
 }
 
+//------------------------------------TIMER------------------------------------------
+function restartTimer(question_id) {
+	var time = 10;
+	clearInterval(timer);
+	klokText.attr({"text": "00:10"});
+	timer = setInterval(function(question_id) {
+		time -= 1;
+
+		if (time < 0){
+			if (question_id === selected_question){
+				gameOver();
+			}
+			clearInterval(timer);
+		} else {
+			klokText.attr({"text": "00:0"+time});
+		}
+	}, 1000, question_id);
+}
 
 setUp();
 animateClouds();
