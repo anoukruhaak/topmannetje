@@ -19,7 +19,9 @@
 
  // var d = Snap("#duurzaamheidsman"),
  // 	legs = d.select("g[id='been']");
- var d = Snap("#duurzaamheid");
+ var d = Snap("#duurzaamheid"),
+ 	 m = Snap("#marketing"),
+ 	 r = Snap("#rutte");
 
 class Answer {
 	constructor(id, text, earth, business, news_id, delay, next) {
@@ -90,7 +92,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "audio": null, "animation": null},
 
 //Food groen
-{"id": 4, "text": "Je duurzaamheidsmanager waarschuwt dat jouw worst en ijs een zware belasting zijn voor het milieu. Je besluit:", "answerA": new Answer(4.1, "Voor 2020 alle vlees en zuivel te vervangen door veganistische alternatieven", 5, -2, 3, 0, 6), 
+{"id": 4, "text": "Waarschuwing van je duurzaamheidsmanager: jouw worst en ijs zijn een zware belasting voor het milieu. Je besluit:", "answerA": new Answer(4.1, "Voor 2020 alle vlees en zuivel te vervangen door veganistische alternatieven", 5, -2, 3, 0, 6), 
 "answerB": new Answer(4.2, "Een vegetarische variant op de Unox-worst te introduceren", 0, -2, 0, 0, 5),
 "answerC": new Answer(4.3, "Samen te werken met het Vegetarisch Verbond, maar niet minder vlees te verkopen.",-2, 4, 0, 0, 5),
 "audio": "audio/duck.mp3", "animation": animateSustainableMan},
@@ -117,15 +119,16 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "audio": null, "animation": null},
 
 //Personal Groen
-{"id": 9, "text": "Jouw shampoos bevatten plastic. Experts denken dat dit slecht is voor het milieu.", "answerA": new Answer(9.1, "Ik haal alle plastics uit voorzorg uit verzorgingsproducten.", 2, -1, 0, 2, 10), 
-"answerB": new Answer(9.2, "Experts twijfelen altijd. Mijn plastics zijn vloeibaar; dat is okee.", -2, 1, 0, 0, 10), 
-"answerC": new Answer(9.3, "Ik stuur mijn slimste lobbyisten naar Brussel om de definitie van 'duurzaam plastic' op te rekken.", -2, 2, 0, 0, 10),
-"audio": null, "animation": null},
+{"id": 9, "text": "Memo van je duurzaamheidsmanager: te lang douchen is slecht voor het milieu. Wat doe je?", 
+"answerA": new Answer(9.1, "Ik start een campagne om mensen te overtuigen minder lang te douchen.", 1, 2, 0, 2, 10), 
+"answerB": new Answer(9.2, "Ik ontwikkel droogshampoo, daar is geen water voor nodig.", 3, -1, 0, 0, 10), 
+"answerC": new Answer(9.3, "Dit is niet een probleem dat ik kan oplossen.", -2, 2, 0, 0, 10),
+"audio": "audio/duck.mp3", "animation": animateSustainableMan},
 
 {"id": 10, "text": "Harde plastic ‘microbeads’ in je scrub producten komen in de zee en worden opgegeten door vissen. NGOs en consumenten zijn boos. Wat doe je?", 
-"answerA": new Answer(2.1, "Je belooft al het plastic uit je cosmetica producten te verwijderen.", 1, -1, 6, 2, 3), 
-"answerB": new Answer(2.2, "Je stapt over op vloeibare plastics en claimt dat die minder schadelijk zijn.", -3, 1, 0, 0, 3), 
-"answerC": null,
+"answerA": new Answer(10.1, "Je belooft al het plastic uit je cosmetica producten te verwijderen.", 1, -1, 6, 2, 3), 
+"answerB": new Answer(10.2, "Je stapt over op vloeibare plastics en claimt dat die minder schadelijk zijn.", -3, 1, 0, 0, 3), 
+"answerC": new Answer(10.3, "Ik stuur mijn slimste lobbyisten naar Brussel om de definitie van 'duurzaam plastic' op te rekken.", -2, 2, 0, 0, 3),
 "audio": null, "animation": null},
 
 //Home Groen
@@ -149,7 +152,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerC": new Answer(13.3, "Ik respecteer de cultuur van het land: werkende kinderen zijn daar heel normaal.", -2, 1, 0, 0, 14),
 "audio": null, "animation": null},
 
-{"id": 14, "text": "Volgens je marketingmanager neemt de vraag naar luxe ijsjes toe in Nigeria. Pak je die kans?", 
+{"id": 14, "text": "Memo van je marketingmanager: de vraag naar luxe ijsjes neemt toe in Nigeria. Pak je die kans?", 
 "answerA": new Answer(14.1, "Natuurlijk: iedereen heeft recht op Magnums. Ik bestel alvast 20 duizend extra diepvriezers", -2, 3, 0, 0, 15), 
 "answerB": new Answer(14.2, "Ik promoot ‘Jane and jerry’ vruchtenijs op waterbasis; zonder zuivel met lokaal fruit.", 0, 0, 0, 0, 15), 
 "answerC": new Answer(14.3, "We bouwen onze ijs-divisie af", 2, -4, 0, 0, 15),
@@ -195,11 +198,11 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "audio": null, "animation": null},
 
 //Fossiel home
-{"id": 21, "text": "Mensen wassen minder vaak en dat is slecht voor de verkoop van je wasproducten. Wat doe je?", 
+{"id": 21, "text": "Memo van marketing: mensen wassen minder vaak hun handen - jouw zeep wordt minder verkocht. Wat doe je?", 
 "answerA": new Answer(21.1, "Je start een campagne over hygiene.", -3, 4, 0, 0, 18), 
 "answerB": new Answer(21.2, "Je ontwikkelt een krachtiger wasmiddel dat kleding langer schoon houdt", 2, 1, 0, 0, 18), 
 "answerC": null,
-"audio": null, "animation": null},
+"audio": "audio/duck.mp3", "animation": animateMarketingMan},
 
 //Fossiel eind
 {"id": 22, "text": "Amnesty International bewijst dat er volop kinderarbeid plaatsvindt op palmolieplantages waar jij inkoopt. Jou reactie:", 
@@ -244,7 +247,7 @@ function findNextQuestion(next_qid, old_qid) {
 		if (homeDone && careDone && foodDone) {
 			console.log("earth: " + global_state.earth + "bizz" + global_state.business);
 			//calculate points
-			if (global_state.earth > 10 && global_state.business <5) {
+			if (global_state.earth > 15 && global_state.business <5) {
 				//too green
 				return 24;
 			} else if (global_state.earth < 5) {
@@ -547,6 +550,8 @@ function breakNews () {
 
 function setUp(){
 	setElementAboveScreen(d);
+	setElementAboveScreen(m);
+	setElementAboveScreen(r);
 	// d.attr({visibility: "hidden"});
 	help.mouseover(animateHelpButton,resetSVG);
 	trophee1.drag();
@@ -566,6 +571,11 @@ function setUp(){
 		});
 	};
 	
+	help.node.onclick = function () {
+		animateMoveDown(r);
+		var file = new Audio("audio/voicemail.mp3");
+		file.play();
+	};
 	//Setup answer buttons	
 	answer_a.node.onclick = function () {
 		changeBackgroundColor("grey", "#99a2a2", answer_a.select("rect"));
@@ -642,20 +652,20 @@ function animateClouds(){
 function animateMoveDown(elem){
 	var startMatrix = new Snap.Matrix(),
 		endMatrix = new Snap.Matrix();
-		startMatrix.translate(0, -680);
-		endMatrix.translate(0, -680);
-		startMatrix.translate(0, 500);
+		startMatrix.translate(-150, -680);
+		endMatrix.translate(-150, -680);
+		startMatrix.translate(150, 500);
 
 	elem.attr({opacity: 1});
-	elem.animate({transform: startMatrix}, 1500, mina.easein, function () {
-		elem.animate({transform: endMatrix}, 2500, mina.easeout, function () {
+	elem.animate({transform: startMatrix}, 1800, mina.bounce, function () {
+		elem.animate({transform: endMatrix}, 4000, mina.easeout, function () {
 			elem.animate({opacity: 0}, 1, mina.easeinout, null);
 		});
 	});
 }
 
 function animateMarketingMan() {
-	console.log("marketing");
+	animateMoveDown(m);
 }
 
 function animateSustainableMan() {
@@ -669,7 +679,7 @@ function displayPopup(text, action) {
 
 function setElementAboveScreen(elem) {
 	var matrix = new Snap.Matrix();
-	matrix.translate(0, -680);
+	matrix.translate(-150, -650);
 	elem.transform(matrix);
 	elem.attr({opacity: 0});
 }
