@@ -208,7 +208,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(23.1, "Je verhoogt het budget van je PR-afedeling met 1 miljoen", -1, 0, 0, 0, 100), 
 "answerB": new Answer(23.2, "Je verhoogt het budget van je PR-afedeling met 20 miljoen", -3, 1, 0, 0, 100), 
 "answerC": new Answer(23.3, "Je sleept Greenpeace voor de rechter", -3, -1, 0, 0, 100),
-"audio": "monkey/mp3", "animation": null},
+"audio": "monkey.mp3", "animation": null},
 
 //Duurzaam eind
 {"id": 24, "text": "Het gaat zo slecht met je bedrijfsvoering dat een concurrent dreigt met een vijandelijke overname. Wat doe je?", 
