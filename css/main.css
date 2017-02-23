@@ -107,8 +107,13 @@ body {
   top:1px;
 }
 
-        
+ .loading {
+  position: absolute;
+ }       
 
+.end-page {
+  position: absolute;
+}
 
 
 

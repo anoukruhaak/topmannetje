@@ -325,13 +325,6 @@ function displayDashboard(id) {
 	document.getElementById("antw_c").style.visibility = "visible";
 }
 
-function goToLoading() {
-	window.location.href = "loading.html"
-}
-
-function goToFinal() {
-
-}
 
 function resetButtons() {
 	colorButton(answer_a, "#99a2a2");
@@ -614,7 +607,7 @@ function setUp(){
 		midMatrix = new Snap.Matrix();
 		newsText.transform(startMatrix);
 		startMatrix.translate(1000, 0);
-		midMatrix.translate(-100, 0);
+		midMatrix.translate(-1000, 0);
 
 		newsText.animate({opacity: 0.7, transform: midMatrix}, 9000, mina.linear, function () {
 			newsText.animate({opacity: 1.0, transform: startMatrix}, 1, mina.easeout, function () {
@@ -725,6 +718,7 @@ function bounceHulpButton() {
 }
 
 //------------------------------------TIMER------------------------------------------
+
 function restartTimer(question_id) {
 	var time = 10;
 	clearInterval(timer);
@@ -754,6 +748,19 @@ function restartGame() {
  	business_state = 2;
 
  	setUp();
+}
+
+//-------------------------------------------GOTO-------------------------------------------
+function goToLoading() {
+	if (global_state.earth > 15) {
+		window.location.href = "appelboer.html"
+	} else if (global_state.earth > 10 && global_state.business > 5){
+		window.location.href = "duurzaam.html"
+	} else if (global_state.earth > 5 && global_state.business > 8) {
+		window.location.href = "reputatie.html"
+	} else {
+		window.location.href = "speel_op_zeker.html"
+	}
 }
 
 setUp();
