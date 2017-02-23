@@ -272,20 +272,25 @@ function findNextQuestion(next_qid, old_qid) {
 		}
 	}
 
-	if (next_qid === 100 ) {
+	if (next_qid === 0) {
+		clearInterval(timer);
+		console.log("wrong gender");
+
+		displayPopup("Fout antwoord!", "Alleen mannen kunnen topmán worden. Probeer het opnieuw.", function () {
+			displayQuestion(0);
+			document.getElementById('popup').style.display = "none";
+		})
+	} else if (next_qid === 100 ) {
 		goToLoading();
-	}
-	else if (next_qid === 16) {
+	}else if (next_qid === 16) {
 		if (global_state.earth > global_state.business) {
 			displayQuestion(next_qid);
 		} else {
 			displayQuestion(26);
 		}
-	}
-	else if (next_qid != 3 && next_qid != 18){
+	}else if (next_qid != 3 && next_qid != 18){
 		displayQuestion(next_qid);
-	} 
-	else {
+	} else {
 		updateCategoriesFinished(old_qid);
 		var id = handleCategoryFinished(next_qid);
 
