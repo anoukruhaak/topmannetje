@@ -565,15 +565,12 @@ function updateState(){
 		global_state.business += current_state.business;
 		updateBusiness(global_state.business);
 		updateGlobe(global_state.earth);
+		flickerPlanks(current_state.earth, current_state.business);
 
 		if (current_state.news_ids.length > 0) {
 			updateNewsBanner(current_state);
 		}
 	}
-
-	flickerPlanks(current_state.earth, current_state.business);
-
-
 }
 
 //------------------------------------------- ANIMATIONS --------------------------------------------		
