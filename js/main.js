@@ -204,7 +204,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 {"id": 17, "text": "Volgens marktonderzoek gaat het niet goed met de reputatie van je bedrijf. Tijd voor nieuwe slogan. Wat wordt het? ", 
 "answerA": new Answer(17.1, "We doen ons best, iets beter dan de rest.", -1, 5, 22, 0, 18), 
 "answerB": new Answer(17.2, "Deal with it", -1, 5, 22, 0, 18), 
-"answerC": new Answer(17.3, "Doe maar lekker duurzaam", -5, 10, 22,0, 18),
+"answerC": new Answer(17.3, "Doe maar lekker duurzaam", -5, 5, 22,0, 18),
 "audio": null, "animation": bounceHulpButton},
 
 {"id": 18, "text": "Welke divisie pas je als eerste aan?", 
@@ -216,21 +216,21 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 //Fossiel food
 {"id": 19, "text": "De tomatenoogst valt tegen dit jaar. Wat doe je?", 
 "answerA":  new Answer(19.1, "Je vliegt tomaten in uit Mexico.", -10, 5, 16, 0, 18), 
-"answerB": new Answer(19.2, "Je gebruikt duurzame diepvriestomaten. ", 5, 0, 16, 0, 18), 
+"answerB": new Answer(19.2, "Je gebruikt duurzame diepvriestomaten. ", 5, -5, 16, 0, 18), 
 "answerC": null,
 "audio": null, "animation": null},
 
 //Fossiel cosmetica
 {"id": 20, "text": "De EU stelt strengere eisen aan het gebruik van microplastics in cosmetica. Wat doe je?", 
 "answerA": new Answer(20.1, "Je stuurt je slimste lobbyisten naar Brussel om de definitie van plastic in de wet op te rekken. ", -5, 10, 17, 0, 18), 
-"answerB": new Answer(20.2, "Je vraagt je beste chemici om een plastic-vrije shampoo te creëren.", 10, -5, 17, 0, 18), 
+"answerB": new Answer(20.2, "Je vraagt je beste chemici om een plastic-vrije shampoo te creëren.", 10, -10, 17, 0, 18), 
 "answerC": null,
 "audio": null, "animation": bounceHulpButton},
 
 //Fossiel home
 {"id": 21, "text": "Memo van marketing: mensen wassen minder vaak hun handen - jouw zeep wordt minder verkocht. Wat doe je?", 
 "answerA": new Answer(21.1, "Je start een campagne over hygiene.", -5, 10, 18, 0, 18), 
-"answerB": new Answer(21.2, "Je ontwikkelt een krachtiger wasmiddel dat kleding langer schoon houdt", 5, 5, 18, 0, 18), 
+"answerB": new Answer(21.2, "Je ontwikkelt een krachtiger wasmiddel dat kleding langer schoon houdt", 5, -10, 18, 0, 18), 
 "answerC": null,
 "audio": "audio/duck.mp3", "animation": animateMarketingMan},
 
