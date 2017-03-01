@@ -587,7 +587,8 @@ function setUp(){
 	help.mouseover(animateHelpButton,resetSVG);
 	trophee1.drag();
 	koffer.drag();
-	newsText.select("text").attr({"font-size": "16px", "font-family": "Catamaran, sans-serif", "font-style": "regular", "color": "red"});
+	newsText.select("text[id='txt1']").attr({"font-size": "16px", "font-family": "Catamaran, sans-serif", "font-style": "bold", "color": "red"});
+	newsText.select("text[id='txt2']").attr({"font-size": "16px", "font-family": "Catamaran, sans-serif", "font-style": "bold", "color": "red"});
 	
 	oldNews = "BREAKING NEWS -- Unilever op zoek naar nieuwe topman!"
 	newsText.select("text[id='txt1']").attr({"text": oldNews});
@@ -644,7 +645,7 @@ function setUp(){
 
 		newsText.transform(startMatrix);
 	
-		newsText.animate({opacity: 0.7, transform: midMatrix}, 9000, mina.linear, function () {
+		newsText.animate({opacity: 0.7, transform: midMatrix}, 10000, mina.linear, function () {
 			newsText.animate({opacity: 1.0, transform: startMatrix}, 1, mina.easeout, function () {
 				moveNewsBanner();
 			});
