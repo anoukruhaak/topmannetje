@@ -17,7 +17,8 @@
  	fabriek_mi = s.select("g[id='fabriek-midden']"),
  	klokText = s.select("g[id='klok']").select("text"),
  	newsText = s.select("g[id='news-tekst']"),
- 	timer = setInterval(function() {});
+ 	timer = setInterval(function() {}),
+ 	oldNews = "";
 
  // var d = Snap("#duurzaamheidsman"),
  // 	legs = d.select("g[id='been']");
@@ -87,9 +88,9 @@ new NewsText(21, "Nieuwe topman Unilever wil hogere marges en meer winst."),
 new NewsText(22, "Unilever verwelkomt nieuwe topman."),
 ];
 
-var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answerA": new Answer(0.1, "Man", 0, 0, 21, 0, 1), 
-"answerB": new Answer(0.2, "Vrouw", 0, 0, 21, 0, 0), 
-"answerC": new Answer(0.3, "Geen van beiden.", 0, 0, 21, 0, 0),
+var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answerA": new Answer(0.1, "Man", 0, 0, 20, 0, 1), 
+"answerB": new Answer(0.2, "Vrouw", 0, 0, 20, 0, 0), 
+"answerC": new Answer(0.3, "Geen van beiden.", 0, 0, 20, 0, 0),
 "audio": null, "animation": null},
 
 {"id": 1, "text": "Gefeliciteerd! Je bent topman van Unilever. De planeet kreunt onder jouw productie. Je eerste besluit:", 
@@ -464,15 +465,19 @@ function processAnswer(answer) {
 
 function updateState(){
 	function updateNewsBanner(state) {
-		var banner = " BREAKING NEWS: ";
-		var news_str = "";
-		current_state.news_ids.forEach( function (id) {
-			str = newsArray[id] ? newsArray[id].text : "De zon schijnt minder fel, zeggen wetenschappers";
-			console.log("news  " + str + id);
+		var banner = " BREAKING NEWS -- ";
+		if (current_state.news_ids.length > 1) {
+			oldNews = newsArray[current_state.news_ids[1]].text;
 
-			news_str += banner + str;
-		});
-		newsText.select("text").attr({"text": news_str});
+			newsText.select("text[id='txt1']").attr({"text": oldNews});
+			newsText.select("text[id='txt2']").attr({"text": banner + newsArray[current_state.news_ids[0]].text});
+
+		} else if (current_state.news_ids.length > 0) {
+			var new_str = banner + newsArray[current_state.news_ids[0]].text;
+			newsText.select("text[id='txt1']").attr({"text": oldNews});
+			newsText.select("text[id='txt2']").attr({"text": new_str});
+			oldNews = new_str;
+		}
 	}
 
 	function updateGlobe(points) {
@@ -583,6 +588,10 @@ function setUp(){
 	trophee1.drag();
 	koffer.drag();
 	newsText.select("text").attr({"font-size": "16px", "font-family": "Catamaran, sans-serif", "font-style": "regular", "color": "red"});
+	
+	oldNews = "BREAKING NEWS -- Unilever op zoek naar nieuwe topman!"
+	newsText.select("text[id='txt1']").attr({"text": oldNews});
+	newsText.select("text[id='txt2']").attr({"text": oldNews});
 
 	showFactories(true, true, false);
 	showGlobe(2);
@@ -629,15 +638,19 @@ function setUp(){
 	function moveNewsBanner () {
 		var startMatrix = new Snap.Matrix(),
 		midMatrix = new Snap.Matrix();
-		newsText.transform(startMatrix);
+		
 		startMatrix.translate(1000, 0);
 		midMatrix.translate(-1000, 0);
 
+		newsText.transform(startMatrix);
+	
 		newsText.animate({opacity: 0.7, transform: midMatrix}, 9000, mina.linear, function () {
 			newsText.animate({opacity: 1.0, transform: startMatrix}, 1, mina.easeout, function () {
 				moveNewsBanner();
 			});
 		});
+
+		
 	};
 	moveNewsBanner();
 	displayQuestion(0);
