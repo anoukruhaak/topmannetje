@@ -467,7 +467,7 @@ function updateState(){
 	function updateNewsBanner(state) {
 		var banner = " BREAKING NEWS -- ";
 		if (current_state.news_ids.length > 1) {
-			oldNews = newsArray[current_state.news_ids[1]].text;
+			oldNews = banner + newsArray[current_state.news_ids[1]].text;
 
 			newsText.select("text[id='txt1']").attr({"text": oldNews});
 			newsText.select("text[id='txt2']").attr({"text": banner + newsArray[current_state.news_ids[0]].text});
@@ -639,12 +639,11 @@ function setUp(){
 	function moveNewsBanner () {
 		var startMatrix = new Snap.Matrix(),
 		midMatrix = new Snap.Matrix();
-		
+		newsText.transform(startMatrix);
 		startMatrix.translate(1000, 0);
 		midMatrix.translate(-1000, 0);
 
-		newsText.transform(startMatrix);
-	
+		newsText.stop();
 		newsText.animate({opacity: 0.7, transform: midMatrix}, 10000, mina.linear, function () {
 			newsText.animate({opacity: 1.0, transform: startMatrix}, 1, mina.easeout, function () {
 				moveNewsBanner();
