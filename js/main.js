@@ -744,9 +744,9 @@ function bounceHulpButton() {
 //------------------------------------TIMER------------------------------------------
 
 function restartTimer(question_id) {
-	var time = 10;
+	var time = 20;
 	clearInterval(timer);
-	klokText.attr({"text": "00:10"});
+	klokText.attr({"text": "00:"+time});
 	timer = setInterval(function(question_id) {
 		time -= 1;
 
@@ -755,6 +755,8 @@ function restartTimer(question_id) {
 				gameOver();
 			}
 			clearInterval(timer);
+		} else if (time > 9) {
+			klokText.attr({"text": "00:"+time});
 		} else {
 			klokText.attr({"text": "00:0"+time});
 		}
