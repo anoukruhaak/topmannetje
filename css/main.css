@@ -15,7 +15,7 @@ body {
   z-index: 10;
   margin-top:3%;
   top:3%;
-  width: 80%;
+  width: 70%;
   height:30%;
   transform: translate(10%, -20%);
   text-align: center;
@@ -34,17 +34,17 @@ body {
 .vraag {
   pointer-events: none;
   text-anchor: middle;
-  font-size: 1.4em;
+  font-size: 1.2em;
   font-weight: 600;
   color: #102d43;
 }
 
 .antwoord {
   pointer-events: none;
-  width: 60%;
+  width: 50%;
   transform: translate(40%, 0%);
   text-align: left;
-  font-size: 1.0em;
+  font-size: 0.9em;
   font-weight: 400;
   color: #585757;
 }
