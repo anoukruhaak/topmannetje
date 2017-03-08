@@ -235,7 +235,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "audio": "audio/duck.mp3", "animation": animateMarketingMan},
 
 //Fossiel eind
-{"id": 22, "text": "Amnesty International bewijst dat er volop kinderarbeid plaatsvindt op palmolieplantages waar jij inkoopt. Jou reactie:", 
+{"id": 22, "text": "Amnesty International bewijst dat er volop kinderarbeid plaatsvindt op palmolieplantages waar jij inkoopt. Jouw reactie:", 
 "answerA": new Answer(22.1, "\'De plantages zijn niet van ons: de Indonesische regering is verantwoordelijk\'", -10, -5, 19, 0, 23), 
 "answerB": new Answer(22.2, "\‘De beschuldiging van Amnesty is onbewezen maar we verwelkomen de kritiek\’", -5, 10, 19, 0, 23), 
 "answerC": new Answer(22.3, "\‘Alle relaties met beschuldigde plantagehouders worden stopgezet tot tegendeel bewezen is\’",  10, -10, 19, 0, 23),
@@ -814,13 +814,13 @@ function restartGame() {
 //-------------------------------------------GOTO-------------------------------------------
 function goToLoading() {
 	if (global_state.earth > 15) {
-		window.location.href = "appelboer.html"
+		window.location.href = "appelboer.html";
 	} else if (global_state.earth > 10 && global_state.business > 5){
-		window.location.href = "duurzaam.html"
+		window.location.href = "duurzaam.html";
 	} else if (global_state.earth > 5 && global_state.business > 8) {
-		window.location.href = "reputatie.html"
+		window.location.href = "reputatie.html";
 	} else {
-		window.location.href = "speel_op_zeker.html"
+		window.location.href = "speel_op_zeker.html";
 	}
 }
 

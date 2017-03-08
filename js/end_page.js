@@ -12,15 +12,21 @@ function transitionToEndPage(){
 }
 
 function setUp(){
-	var arrow = end_page.select("g[id='arrow']"),
-		inv = end_page.select("tspan[id='Investico']");
+	var arrow = end_page.select("text[id='button']"),
+		inv = end_page.select("text[id='Investico']");
 
-	inv.node.onclick = goToFacebook;
-	arrow.node.onclick = goToFacebook;
+	arrow.node.onclick = function () {
+		window.location.href = "http://www.platform-investico.nl";
+	};
+
 
 	function goToFacebook() {
 		// var pathname = window.location.pathname; 
 		// window.location.href ="http://www.facebook.com/share.php?u=topmannetje.heroku.app/" +pathname;
+	}
+
+	function goToTwitter() {
+
 	}
 }
 
