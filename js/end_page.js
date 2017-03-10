@@ -14,41 +14,47 @@ function transitionToEndPage(){
 	}, 1500);
 }
 
-function setUp(){
-	var url = window.location.pathname,
-	urlsplit = url.split("/").slice(-1)[0];
-
+function setUp() {
+	function getImage() {
+		var url = window.location.pathname,
+		urlsplit = url.split("/").slice(-1)[0];
+		switch (urlsplit) {
+			case "appelboer.html":
+				return "appelboer.jpg";
+				break;
+			case "duurzaam.html":
+				return "duurzaam.jpg";
+				break;
+			case "reputatie.html":
+				return "baas.jpg";
+				break;
+			case "speel_op_zeker":
+				return "reputatiemanager.jpg";
+				break;
+			default:
+				return "reputatiemanager.jpg";
+				break;
+		}
+	}
 
 	var arrow = end_page.select("text[id='button']"),
 		fb = end_page.select("path[id='fb']"),
-		twitter = end_page.select("g[id='twitter']");
+		twitter = end_page.select("path[id='twitter']");
 
 	arrow.node.onclick = function () {
 		window.location.href = "http://www.platform-investico.nl";
 	};
 
 	fb.node.onclick = function () {
-		switch (urlsplit) {
-			case "appelboer.html":
-				goToFacebook("appelboer.jpg");
-				break;
-			case "duurzaam.html":
-				goToFacebook("duurzaam.jpg");
-				break;
-			case "reputatie.html":
-				goToFacebook("baas.jpg");
-				break;
-			case "speel_op_zeker":
-				goToFacebook("reputatiemanager.jpg");
-				break;
-			default:
-				goToFacebook("reputatiemanager.jpg");
-				break;
-		}
-	}
+		goToFacebook();
+	};
 
+	twitter.node.onclick = function () {
+		goToTwitter();
+	};
 
-	function goToFacebook(img) {
+	function goToFacebook() {
+		var img = getImage();
 		var url = "https://www.facebook.com/sharer/sharer.php?u=topmannetje.herokuapp.com&title=Wat+voor+topman+ben+jij%3F&caption=Platform+Investico&quote=&description=Wat+voor+topmannetje+ben+jij%3F+Ga+jij+voor+het+snelle+geld%3F+Of+zet+je+je+bedrijf+in+om+de+planeet+te+redden%3F";
 		var picture = "&picture=http%3A%2F%2Ftopmannetje.herokuapp.com%2Fimg%2F"+ img 
 		console.log(url);
@@ -56,7 +62,9 @@ function setUp(){
 	}
 
 	function goToTwitter() {
-
+		var img = getImage();
+		var url = "https://twitter.com/share?url="+escape("http://topmannetje.herokuapp.com")+"&text=Wat+voor+topman+ben+jij%3F"+"&image-src=http://topmannetje.herokuapp.com/img/" + img;	
+		window.location.href = url;
 	}
 }
 
