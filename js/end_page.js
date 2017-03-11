@@ -39,6 +39,7 @@ function setUp() {
 
 	var arrow = end_page.select("text[id='button']"),
 		fb = end_page.select("path[id='fb']"),
+		mail = end_page.select("g[id='mail']"),
 		twitter = end_page.select("path[id='twitter']");
 
 	arrow.node.onclick = function () {
@@ -53,6 +54,10 @@ function setUp() {
 		goToTwitter();
 	};
 
+	mail.node.onclick = function () {
+		sendEmail();
+	};
+
 	function goToFacebook() {
 		var img = getImage();
 		var url = "https://www.facebook.com/sharer/sharer.php?u=topmannetje.herokuapp.com&title=Wat+voor+topman+ben+jij%3F&caption=Platform+Investico&quote=&description=Wat+voor+topmannetje+ben+jij%3F+Ga+jij+voor+het+snelle+geld%3F+Of+zet+je+je+bedrijf+in+om+de+planeet+te+redden%3F";
@@ -65,6 +70,10 @@ function setUp() {
 		var img = getImage();
 		var url = "https://twitter.com/share?url="+escape("http://topmannetje.herokuapp.com")+"&text=Wat+voor+topman+ben+jij%3F"+"&image-src=http://topmannetje.herokuapp.com/img/" + img;	
 		window.location.href = url;
+	}
+
+	function sendEmail(){
+		window.location.href = "mailto:?subject=Wat voor topman ben jij?&body=I thought you might find this information interesting:&attachment=http://topmannetje.herokuapp.com/img/appelboer.jpg";
 	}
 }
 

@@ -4,7 +4,6 @@
  	answer_a = s.select("g[id='a']"),
  	answer_b = s.select("g[id='b']"),
  	answer_c = s.select("g[id='c']"),
- 	trophee1 = s.select("g[id='kikker-beker']"),
  	koffer = s.select("g[id='koffer']"),
  	globe = s.select("g[id='globe']"),
  	globe_water = globe.select("circle[id='globe-water']"),
@@ -15,11 +14,9 @@
  	fabriek_gr = s.select("g[id='fabriek-groot']"),
  	fabriek_kl = s.select("g[id='fabriek-klein']"),
  	fabriek_mi = s.select("g[id='fabriek-midden']"),
- 	klokText = s.select("g[id='klok']").select("text"),
  	newsText = s.select("g[id='news-tekst']"),
  	plank_globe = s.select("path[id='plank-globe']"),
  	plank_fabriek = s.select("path[id='plank-fabriek']"),
- 	timer = setInterval(function() {}),
  	oldNews = "",
  	plank_color = "#b6ab99";
 
@@ -301,7 +298,6 @@ function findNextQuestion(next_qid, old_qid) {
 	}
 
 	if (next_qid === 0) {
-		clearInterval(timer);
 		console.log("wrong gender");
 
 		displayPopup("Fout antwoord!", "Alleen mannen kunnen topmán worden. Probeer het opnieuw.", function () {
@@ -333,7 +329,6 @@ function findNextQuestion(next_qid, old_qid) {
 function displayDashboard(id) {
 	console.log(homeDone, careDone, foodDone);
 	selected_question = id;
-	restartTimer(id);
 
 	if (homeDone) colorButton(answer_c, "green");
 	if (careDone) colorButton(answer_b, "green");
@@ -367,7 +362,6 @@ function colorButton(button, color){
 
 function displayQuestion(id) {
 	selected_question = id;
-	restartTimer(id);
 	resetButtons();
 	var txt = questions[id].text,
 		a = questions[id].answerA.text,
@@ -592,7 +586,7 @@ function resetSVG (){
 };
 
 function breakNews () {
-	bg = s.select("g[id='achtergrond']").select("rect");
+	bg = s.select("rect[id='achtergrond']");
 
 	var anim2 = function () {bg.animate({fill: "white"}, 10000, mina.easeinout, anim3)};
 	var anim1 = function () {bg.animate({fill: "lemonchiffon", filter: Snap("#glow")}, 200, mina.easeinout, anim2)};
@@ -607,10 +601,9 @@ function setUp(){
 	setElementAboveScreen(r);
 
 	help.mouseover(animateHelpButton,resetSVG);
-	trophee1.drag();
 	koffer.drag();
-	newsText.select("text[id='txt1']").attr({"font-size": "16px", "font-family": "Catamaran, sans-serif", "font-style": "bold", "color": "red"});
-	newsText.select("text[id='txt2']").attr({"font-size": "16px", "font-family": "Catamaran, sans-serif", "font-style": "bold", "color": "red"});
+	newsText.select("text[id='txt1']").attr({"font-style": "bold", "color": "red"});
+	newsText.select("text[id='txt2']").attr({"font-style": "bold", "color": "red"});
 	
 	oldNews = "BREAKING NEWS -- Unilever op zoek naar nieuwe topman!"
 	newsText.select("text[id='txt1']").attr({"text": oldNews});
@@ -777,27 +770,6 @@ function bounceHulpButton() {
 }
 
 //------------------------------------TIMER------------------------------------------
-
-function restartTimer(question_id) {
-	var time = 30;
-	clearInterval(timer);
-	klokText.attr({"text": "00:"+time});
-	timer = setInterval(function(question_id) {
-		time -= 1;
-
-		if (time < 0){
-			if (question_id === selected_question){
-				gameOver();
-			}
-			clearInterval(timer);
-		} else if (time > 9) {
-			klokText.attr({"text": "00:"+time});
-		} else {
-			klokText.attr({"text": "00:0"+time});
-		}
-	}, 1000, question_id);
-}
-
 function restartGame() {
 	global_state = new State(5, 5, []),
  	states = [],
