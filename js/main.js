@@ -15,10 +15,10 @@
  	fabriek_kl = s.select("g[id='fabriek-klein']"),
  	fabriek_mi = s.select("g[id='fabriek-midden']"),
  	newsText = s.select("g[id='news-tekst']"),
- 	plank_globe = s.select("g[id='plank-globe']"),
- 	plank_fabriek = s.select("g[id='plank-fabriek']"),
+ 	plank_globe = s.select("rect[id='planet-score-bg']"),
+ 	plank_fabriek = s.select("rect[id='profit-score-bg']"),
  	oldNews = "",
- 	plank_color = "#b6ab99";
+ 	plank_color = "#5b5447";
 
  // var d = Snap("#duurzaamheidsman"),
  // 	legs = d.select("g[id='been']");
@@ -359,35 +359,76 @@ function colorButton(button, color){
 }
 
 function displayQuestion(id) {
-	selected_question = id;
-	resetButtons();
-	var txt = questions[id].text,
-		a = questions[id].answerA.text,
-		b = questions[id].answerB.text,
-		c = questions[id].answerC,
-		audio = questions[id].audio,
-		animation = questions[id].animation; 
-	document.getElementById('vraag').innerHTML = txt;
-	document.getElementById('antw_a').innerHTML = a;
-	document.getElementById('antw_b').innerHTML = b;
 
-	if (c === null) {
-		document.getElementById("antw_c").style.visibility = "hidden";
-		answer_c.attr({display: 'none'});
-	} else {
-		document.getElementById("antw_c").style.visibility = "visible";
-		document.getElementById('antw_c').innerHTML = c.text;
-		answer_c.attr({display: ''});
+	// fade out
+
+	function fadeOut(el){
+	  el.style.opacity = 1;
+
+	  (function fade() {
+	    if ((el.style.opacity -= .1) < 0) {
+	      el.style.display = 'none';
+	      el.classList.add('is-hidden');
+	    } else {
+	      requestAnimationFrame(fade);
+	    }
+	  })();
 	}
 
-	if (audio){
-		var file = new Audio(audio);
-		file.play();
+	// fade in
+
+	function fadeIn(el){
+	  if (el.classList.contains('is-hidden')){
+	    el.classList.remove('is-hidden');
+	  }
+	  el.style.opacity = 0;
+	  el.style.display = "block";
+
+	  (function fade() {
+	    var val = parseFloat(el.style.opacity);
+	    if (!((val += .1) > 1)) {
+	      el.style.opacity = val;
+	      requestAnimationFrame(fade);
+	    }
+	  })();
 	}
 
-	if (animation) {
-		animation();
-	}
+	var el = document.querySelector('.js-fade');
+	fadeOut(el);
+
+	setTimeout(function () {
+		selected_question = id;
+		resetButtons();
+		var txt = questions[id].text,
+			a = questions[id].answerA.text,
+			b = questions[id].answerB.text,
+			c = questions[id].answerC,
+			audio = questions[id].audio,
+			animation = questions[id].animation; 
+		document.getElementById('vraag').innerHTML = txt;
+		document.getElementById('antw_a').innerHTML = a;
+		document.getElementById('antw_b').innerHTML = b;
+
+		if (c === null) {
+			document.getElementById("antw_c").style.visibility = "hidden";
+			answer_c.attr({display: 'none'});
+		} else {
+			document.getElementById("antw_c").style.visibility = "visible";
+			document.getElementById('antw_c').innerHTML = c.text;
+			answer_c.attr({display: ''});
+		}
+
+		if (audio){
+			var file = new Audio(audio);
+			file.play();
+		}
+
+		if (animation) {
+			animation();
+		}
+		var el = document.querySelector('.js-fade');
+		fadeIn(el);
+	}, 600);
 };
 
 

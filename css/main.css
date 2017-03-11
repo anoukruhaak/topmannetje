@@ -18,8 +18,20 @@ body {
   width: 120px;
 }
 
+h1 {
+  animation-name: fadeInOut;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+}
+
+.is-hidden {
+  display: none;
+}
+
+
 .vraag-antwoord-box {
   position: absolute;
+  display: inline-block;
   z-index: 10;
   margin-top:3%;
   top:3%;
