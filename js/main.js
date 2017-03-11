@@ -18,7 +18,11 @@
  	plank_globe = s.select("rect[id='planet-score-bg']"),
  	plank_fabriek = s.select("rect[id='profit-score-bg']"),
  	oldNews = "",
- 	plank_color = "#5b5447";
+ 	plank_color = "#5b5447",
+ 	tm_dark_green = "#60795b",
+ 	tm_light_green = "#71956c",
+ 	tm_red = "#e0421d",
+ 	brown = "#956c5c";
 
  // var d = Snap("#duurzaamheidsman"),
  // 	legs = d.select("g[id='been']");
@@ -375,28 +379,28 @@ function displayQuestion(id) {
 	  })();
 	}
 
-	// fade in
-
-	function fadeIn(el){
-	  if (el.classList.contains('is-hidden')){
-	    el.classList.remove('is-hidden');
-	  }
-	  el.style.opacity = 0;
-	  el.style.display = "block";
-
-	  (function fade() {
-	    var val = parseFloat(el.style.opacity);
-	    if (!((val += .09) > 1)) {
-	      el.style.opacity = val;
-	      requestAnimationFrame(fade);
-	    }
-	  })();
-	}
+	// fade i
 
 	var el = document.querySelector('.js-fade');
 	fadeOut(el);
 
 	setTimeout(function () {
+		function fadeIn(el){
+		  if (el.classList.contains('is-hidden')){
+		    el.classList.remove('is-hidden');
+		  }
+		  el.style.opacity = 0;
+		  el.style.display = "block";
+
+		  (function fade() {
+		    var val = parseFloat(el.style.opacity);
+		    if (!((val += .05) > 1)) {
+		      el.style.opacity = val;
+		      requestAnimationFrame(fade);
+		    }
+		  })();
+		}
+
 		selected_question = id;
 		resetButtons();
 		var txt = questions[id].text,
@@ -428,7 +432,7 @@ function displayQuestion(id) {
 		}
 		var el = document.querySelector('.js-fade');
 		fadeIn(el);
-	}, 700);
+	}, 1000);
 };
 
 
@@ -559,8 +563,8 @@ function updateState(current_state){
 	}
 
 	function flickerPlanks(earth, business){
-		var earth_color = (earth >= 0) ? "#63a563" : "#9e1d14",
-			business_color = (business >= 0) ? "#63a563" : "#9e1d14";
+		var earth_color = (earth >= 0) ? tm_light_green : tm_red,
+			business_color = (business >= 0) ? tm_light_green : tm_red;
 
 		plank_globe.animate({fill: earth_color}, 1500, mina.easein, function () {
 			plank_globe.animate({fill: plank_color}, 1000, mina.easeout, null);
