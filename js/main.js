@@ -27,13 +27,12 @@
  	 r = s.select("g[id='rutte']");
 
 class Answer {
-	constructor(id, text, earth, business, news_id, delay, next) {
+	constructor(id, text, earth, business, news_id, next) {
 		this.id = id;
 		this.text = text;
 		this.earth = earth;
 		this.business = business;
 		this.news_id = news_id;
-		this.delay = delay;
 		this.next = next;
 	}
 };
@@ -46,15 +45,14 @@ class NewsText {
 }
 
 class State {
-	constructor(earth, business, news_ids){
+	constructor(earth, business, news_id){
 		this.earth = earth;
 		this.business = business;
-		this.news_ids = news_ids;
+		this.news_id = news_id;
 	}
 }
 
-var global_state = new State(5, 5, []),
- 	states = [],
+var global_state = new State(5, 5, 0),
  	selected_question = 0,
  	foodDone = false,
  	homeDone = false,
@@ -88,180 +86,180 @@ new NewsText(21, "Nieuwe topman Unilever wil hogere marges en meer winst."),
 new NewsText(22, "Unilever verwelkomt nieuwe topman."),
 ];
 
-var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answerA": new Answer(0.1, "Man", 0, 0, 20, 0, 1), 
-"answerB": new Answer(0.2, "Vrouw", 0, 0, 20, 0, 0), 
-"answerC": new Answer(0.3, "Geen van beiden.", 0, 0, 20, 0, 0),
+var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answerA": new Answer(0.1, "Man", 0, 0, 20, 1), 
+"answerB": new Answer(0.2, "Vrouw", 0, 0, 20, 0), 
+"answerC": new Answer(0.3, "Geen van beiden.", 0, 0, 20, 0),
 "audio": null, "animation": null},
 
 {"id": 1, "text": "Gefeliciteerd! Je bent topman van Unilever. De planeet kreunt onder jouw productie. Je eerste besluit:", 
-"answerA": new Answer(1.1, "Ik gooi het roer om en kies voor een volledig duurzame productie", 5, -5, 0, 0, 2), 
-"answerB": new Answer(1.2, "Ik kan dit niet oplossen. We onderzoeken vergroening maar draaien voorlopig op de oude voet door.", -5, 5, 2, 0, 17), 
+"answerA": new Answer(1.1, "Ik gooi het roer om en kies voor een volledig duurzame productie", 5, -5, 0, 2), 
+"answerB": new Answer(1.2, "Ik kan dit niet oplossen. We onderzoeken vergroening maar draaien voorlopig op de oude voet door.", -5, 5, 2, 17), 
 "answerC": null, 
 "audio": "audio/applause.mp3", "animation": null}, 
 
 //Start Groen
 {"id": 2, "text": "Mooi. Laat je de fabrieken volledig draaien op duurzame energie?", 
-"answerA": new Answer(2.2, "Groene subsidies zijn onzeker; ik begin met 10 procent groen.", -5, 0, 2, 0, 17), 
-"answerB": new Answer(2.1, "Ja, ik stap direct over op volledig groene stroom en bio-brandstof.", 5, 5, 1, 0, 3), 
+"answerA": new Answer(2.2, "Groene subsidies zijn onzeker; ik begin met 10 procent groen.", -5, 0, 2, 17), 
+"answerB": new Answer(2.1, "Ja, ik stap direct over op volledig groene stroom en bio-brandstof.", 5, 5, 1, 3), 
 "answerC": null,
 "audio": null, "animation": bounceHulpButton},
 
 //Keuze
 {"id": 3, "text": "Welke divisie pak je als eerste aan?", 
-"answerA": new Answer(3.1, "Voeding", 0, 0, 0, 0, 4), 
-"answerB": new Answer(3.2, "Cosmetica en verzorgingsproducten", 0, 0, 0, 0, 9), 
-"answerC": new Answer(3.3, "Wasmiddelen en reiniging", 0, 0, 0, 0, 11),
+"answerA": new Answer(3.1, "Voeding", 0, 0, 0, 4), 
+"answerB": new Answer(3.2, "Cosmetica en verzorgingsproducten", 0, 0, 0, 9), 
+"answerC": new Answer(3.3, "Wasmiddelen en reiniging", 0, 0, 0, 11),
 "audio": null, "animation": null},
 
 //Food groen
 {"id": 4, "text": "Waarschuwing van je duurzaamheidsmanager: jouw worst en ijs zijn een zware belasting voor het milieu. Je besluit:", 
-"answerA": new Answer(4.1, "Voor 2020 alle vlees en zuivel te vervangen door veganistische alternatieven", 8, -10, 11, 3, 6), 
-"answerB": new Answer(4.2, "Een vegetarische variant op de Unox-worst te introduceren", 3, -5, 4, 1, 5),
-"answerC": new Answer(4.3, "Samen te werken met het Vegetarisch Verbond, maar niet minder vlees te verkopen.",-10, 10, 0, 0, 6),
+"answerA": new Answer(4.1, "Voor 2020 alle vlees en zuivel te vervangen door veganistische alternatieven", 8, -10, 11, 6), 
+"answerB": new Answer(4.2, "Een vegetarische variant op de Unox-worst te introduceren", 3, -5, 4, 5),
+"answerC": new Answer(4.3, "Samen te werken met het Vegetarisch Verbond, maar niet minder vlees te verkopen.",-10, 10, 0, 6),
 "audio": "audio/duck.mp3", "animation": animateSustainableMan},
 
 {"id": 5, "text": "Weet je het zeker? Unox is cultureel erfgoed!", 
-"answerA": new Answer(5.1, "Klopt, ik kies voor zeker. Unox blijft Unox.", -10, 5, 0, 0, 6), 
-"answerB": new Answer(5.2, "Ik blijf bij mijn besluit: vegetarische worst.", 0, -5, 7, 1, 6), 
+"answerA": new Answer(5.1, "Klopt, ik kies voor zeker. Unox blijft Unox.", -10, 5, 0, 6), 
+"answerB": new Answer(5.2, "Ik blijf bij mijn besluit: vegetarische worst.", 0, -5, 7, 6), 
 "answerC": null,
 "audio": null, "animation": null},
 
 {"id": 6, "text": "Het duurzame ijsmerk Jen & Berry’s is te koop. Wil je het overnemen?", 
-"answerA": new Answer(6.1, "Ja.", -5, 10, 0, 2, 7), 
-"answerB": new Answer(6.2, "Nee", 5, -10, 0, 0, 8), 
+"answerA": new Answer(6.1, "Ja.", -5, 10, 0, 7), 
+"answerB": new Answer(6.2, "Nee", 5, -10, 0, 8), 
 "answerC": null,
 "audio": null, "animation": null},
 
 {"id": 7, "text": "Zeker weten? IJsjes zijn bevroren blokjes zuivel en suiker.", 
-"answerA": new Answer(7.1, "Daar verzin ik wel wat op", -5, 5, 0, 4, 8), 
-"answerB": new Answer(7.2, "Oeps, dan toch maar niet", 5, -5, 0, 0, 8), 
+"answerA": new Answer(7.1, "Daar verzin ik wel wat op", -5, 5, 0, 8), 
+"answerB": new Answer(7.2, "Oeps, dan toch maar niet", 5, -5, 0, 8), 
 "answerC": null,
 "audio": null, "animation": bounceHulpButton},
 
 //Animation: verschuif de koffer met certificaten.
 {"id": 8, "text": "De groenten in je soep en pastasaus moeten duurzaam. Hoe pak je dat aan?", 
-"answerA": new Answer(8.3, "Ik vergroen op mijn eigen manier en bedenk een nieuw keurmerk.", -5, 5, 5, 1, 3), 
-"answerB": new Answer(8.2, "Ik verplicht leveranciers biologisch te produceren.", 5, -5, 0, 0, 3), 
-"answerC": new Answer(8.1, "Ik ga in zee met veel kleine lokaal werkende boeren.", 5, -5, 0, 2, 3), 
+"answerA": new Answer(8.3, "Ik vergroen op mijn eigen manier en bedenk een nieuw keurmerk.", -5, 5, 5, 3), 
+"answerB": new Answer(8.2, "Ik verplicht leveranciers biologisch te produceren.", 5, -5, 0, 3), 
+"answerC": new Answer(8.1, "Ik ga in zee met veel kleine lokaal werkende boeren.", 5, -5, 0, 3), 
 "audio": null, "animation": null},
 
 //Personal Groen
 {"id": 9, "text": "Memo van je duurzaamheidsmanager: te lang douchen is slecht voor het milieu. Wat doe je?", 
-"answerA": new Answer(9.1, "Ik start een campagne om mensen te overtuigen minder lang te douchen.", 5, 5, 0, 2, 10), 
-"answerB": new Answer(9.2, "Ik ontwikkel droogshampoo, daar is geen water voor nodig.", 7, -5, 6, 0, 10), 
-"answerC": new Answer(9.3, "Dit is niet een probleem dat ik kan oplossen.", -10, 10, 0, 0, 10),
+"answerA": new Answer(9.1, "Ik start een campagne om mensen te overtuigen minder lang te douchen.", 5, 5, 0, 10), 
+"answerB": new Answer(9.2, "Ik ontwikkel droogshampoo, daar is geen water voor nodig.", 7, -5, 6, 10), 
+"answerC": new Answer(9.3, "Dit is niet een probleem dat ik kan oplossen.", -10, 10, 0, 10),
 "audio": "audio/duck.mp3", "animation": animateSustainableMan},
 
 {"id": 10, "text": "Harde plastic ‘microbeads’ in je scrub producten komen in de zee en worden opgegeten door vissen. NGOs en consumenten zijn boos. Wat doe je?", 
-"answerA": new Answer(10.1, "Je belooft al het plastic uit je cosmetica producten te verwijderen.", 10, -10, 6, 2, 3), 
-"answerB": new Answer(10.2, "Je stapt over op vloeibare plastics en claimt dat die minder schadelijk zijn.", -5, 5, 13, 1, 3), 
-"answerC": new Answer(10.3, "Ik stuur mijn slimste lobbyisten naar Brussel om de definitie van 'duurzaam plastic' op te rekken.", -10, 10, 0, 0, 3),
+"answerA": new Answer(10.1, "Je belooft al het plastic uit je cosmetica producten te verwijderen.", 10, -10, 6, 3), 
+"answerB": new Answer(10.2, "Je stapt over op vloeibare plastics en claimt dat die minder schadelijk zijn.", -5, 5, 13, 3), 
+"answerC": new Answer(10.3, "Ik stuur mijn slimste lobbyisten naar Brussel om de definitie van 'duurzaam plastic' op te rekken.", -10, 10, 0, 3),
 "audio": null, "animation": null},
 
 //Home Groen
 {"id": 11, "text": "Kans: De Wereldgezondheidsorganisatie kan diarree bij kinderen in Kenia voorkomen met een 'was je handen' campagne. Ga je zeep doneren?", 
-"answerA": new Answer(11.2, "Nee, als bedrijf is dit niet mijn taak.", -5, -5, 0, 0, 12), 
-"answerB": new Answer(11.1, "Ja, het is een goed doel én het versterkt mijn merk.", 5, 5, 10, 0, 12), 
-"answerC": new Answer(11.3, "Natuurlijk. En ik besteed 1 procent van mijn zeepwinst aan extra gezondheidszorg.", 5, -5, 0, 0, 12),
+"answerA": new Answer(11.2, "Nee, als bedrijf is dit niet mijn taak.", -5, -5, 0, 12), 
+"answerB": new Answer(11.1, "Ja, het is een goed doel én het versterkt mijn merk.", 5, 5, 10, 12), 
+"answerC": new Answer(11.3, "Natuurlijk. En ik besteed 1 procent van mijn zeepwinst aan extra gezondheidszorg.", 5, -5, 0, 12),
 "audio": "audio/children.mp3", "animation": null},
 
 {"id": 12, "text": "India is een veelbelovende markt, maar veel Indiërs kunnen de grote pakken waspoeder nog niet betalen.", 
-"answerA": new Answer(12.2, "Ik kom met kleine wegwerpverpakkingen voor een enkele wasbeurt", -10, 10, 15, 2, 3),  
-"answerB": new Answer(12.1, "Ik verander niets aan mijn verpakkingen. Dan maar iets minder omzet.", 10, -10, 0, 0, 3),
-"answerC": new Answer(12.3, "Losse verpakkingen zijn overbodig. Ik verkoop via hervulbare containers.", 5, -5, 0, 0, 3),
+"answerA": new Answer(12.2, "Ik kom met kleine wegwerpverpakkingen voor een enkele wasbeurt", -10, 10, 15, 3),  
+"answerB": new Answer(12.1, "Ik verander niets aan mijn verpakkingen. Dan maar iets minder omzet.", 10, -10, 0, 3),
+"answerC": new Answer(12.3, "Losse verpakkingen zijn overbodig. Ik verkoop via hervulbare containers.", 5, -5, 0, 3),
 "audio": "audio/india.mp3", "animation": null},
 
 
 //Eind groen
 {"id": 13, "text": "Amnesty International bewijst dat er volop kinderarbeid plaatsvindt op palmolieplantages waar jij inkoopt. Jouw actie:", 
-"answerA": new Answer(13.1, "Je spreekt producenten streng toe en organiseert een ronde tafel voor duurzame olie.", -5, 5, 14, 0, 14), 
-"answerB": new Answer(13.2, "Je haalt waar mogelijk palmolie uit je producten en start eigen plantages waar alles deugt.", 10, -10, 10, 0, 14), 
-"answerC": new Answer(13.3, "Ik respecteer de cultuur van het land: werkende kinderen zijn daar heel normaal.", -5, 5, 0, 0, 14),
+"answerA": new Answer(13.1, "Je spreekt producenten streng toe en organiseert een ronde tafel voor duurzame olie.", -5, 5, 14, 14), 
+"answerB": new Answer(13.2, "Je haalt waar mogelijk palmolie uit je producten en start eigen plantages waar alles deugt.", 10, -10, 10, 14), 
+"answerC": new Answer(13.3, "Ik respecteer de cultuur van het land: werkende kinderen zijn daar heel normaal.", -5, 5, 0, 14),
 "audio": null, "animation": null},
 
 {"id": 14, "text": "Memo van je marketingmanager: de vraag naar luxe ijsjes neemt toe in Nigeria. Pak je die kans?", 
-"answerA": new Answer(14.1, "Natuurlijk: iedereen heeft recht op Magnums. Ik bestel alvast 20 duizend extra diepvriezers", -10, 10, 0, 0, 15), 
-"answerB": new Answer(14.2, "Ik promoot ‘Jane and jerry’ vruchtenijs op waterbasis; zonder zuivel met lokaal fruit.", 5, 0, 0, 0, 15), 
-"answerC": new Answer(14.3, "We bouwen onze ijs-divisie af", 10, -10, 10, 0, 15),
+"answerA": new Answer(14.1, "Natuurlijk: iedereen heeft recht op Magnums. Ik bestel alvast 20 duizend extra diepvriezers", -10, 10, 0, 15), 
+"answerB": new Answer(14.2, "Ik promoot ‘Jane and jerry’ vruchtenijs op waterbasis; zonder zuivel met lokaal fruit.", 5, 0, 0, 15), 
+"answerC": new Answer(14.3, "We bouwen onze ijs-divisie af", 10, -10, 10, 15),
 "audio": "audio/duck.mp3", "animation": animateMarketingMan},
 
 {"id": 15, "text": "Greenpeace komt met een rapport over ontbossing door palmolieplantages waar jij inkoopt. Wat doe je?", 
-"answerA": new Answer(15.1, "Je haalt palmolie waar mogelijk uit je producten.", 5, -5, 0, 0, 16), 
-"answerB": new Answer(15.2, "Je bedankt voor het rapport en stelt een samenwerking voor.", -5, 5, 0, 0, 16), 
-"answerC": new Answer(15.2, "Je kaart de kwestie aan bij de volgende vergadering van de Roundtable for Sustainable Palm Oil.", -5, 5, 0, 0, 16),
+"answerA": new Answer(15.1, "Je haalt palmolie waar mogelijk uit je producten.", 5, -5, 0, 16), 
+"answerB": new Answer(15.2, "Je bedankt voor het rapport en stelt een samenwerking voor.", -5, 5, 0, 16), 
+"answerC": new Answer(15.2, "Je kaart de kwestie aan bij de volgende vergadering van de Roundtable for Sustainable Palm Oil.", -5, 5, 0, 16),
 "audio": "audio/rain_forest.mp3", "animation": null},
 
 {"id": 16, "text": "Al die duurzaamheid is niet goed voor je balans. Je aandeelhouders zijn boos. Wat doe je?", 
-"answerA": new Answer(16.1, "Je ontslaat je VP.", 5, -5, 0, 0, 100), 
-"answerB": new Answer(16.2, "Je stapt op.", -5, -5, 0, 0, 100), 
-"answerC": new Answer(16.3, "Je past je strategie aan. Dan maar minder duurzaam", -10, 10, 0, 0, 100),
+"answerA": new Answer(16.1, "Je ontslaat je VP.", 5, -5, 0, 100), 
+"answerB": new Answer(16.2, "Je stapt op.", -5, -5, 0, 100), 
+"answerC": new Answer(16.3, "Je past je strategie aan. Dan maar minder duurzaam", -10, 10, 0, 100),
 "audio": null, "animation": bounceHulpButton},
 
 //Fossiel start
 {"id": 17, "text": "Volgens marktonderzoek gaat het niet goed met de reputatie van je bedrijf. Tijd voor nieuwe slogan. Wat wordt het? ", 
-"answerA": new Answer(17.1, "We doen ons best, iets beter dan de rest.", -1, 5, 22, 0, 18), 
-"answerB": new Answer(17.2, "Deal with it", -1, 5, 22, 0, 18), 
-"answerC": new Answer(17.3, "Doe maar lekker duurzaam", -5, 5, 22,0, 18),
+"answerA": new Answer(17.1, "We doen ons best, iets beter dan de rest.", -1, 5, 22, 18), 
+"answerB": new Answer(17.2, "Deal with it", -1, 5, 22, 18), 
+"answerC": new Answer(17.3, "Doe maar lekker duurzaam", -5, 5, 22, 18),
 "audio": null, "animation": bounceHulpButton},
 
 {"id": 18, "text": "Welke divisie pas je als eerste aan?", 
 "answerA": new Answer(18.1, "Voeding", 0, 0, 22, 0, 19), 
-"answerB": new Answer(18.2, "Cosmetica en verzorgingsproducten", 0, 0, 22, 0, 20), 
-"answerC": new Answer(18.3, "Wasmiddelen en reiniging", 0, 0, 22, 0, 21),
+"answerB": new Answer(18.2, "Cosmetica en verzorgingsproducten", 0, 0, 22, 20), 
+"answerC": new Answer(18.3, "Wasmiddelen en reiniging", 0, 0, 22, 21),
 "audio": null, "animation": null},
 
 //Fossiel food
 {"id": 19, "text": "De tomatenoogst valt tegen dit jaar. Wat doe je?", 
-"answerA":  new Answer(19.1, "Je vliegt tomaten in uit Mexico.", -10, 5, 16, 0, 18), 
-"answerB": new Answer(19.2, "Je gebruikt duurzame diepvriestomaten. ", 5, -5, 16, 0, 18), 
+"answerA":  new Answer(19.1, "Je vliegt tomaten in uit Mexico.", -10, 5, 16, 18), 
+"answerB": new Answer(19.2, "Je gebruikt duurzame diepvriestomaten. ", 5, -5, 16, 18), 
 "answerC": null,
 "audio": null, "animation": null},
 
 //Fossiel cosmetica
 {"id": 20, "text": "De EU stelt strengere eisen aan het gebruik van microplastics in cosmetica. Wat doe je?", 
-"answerA": new Answer(20.1, "Je stuurt je slimste lobbyisten naar Brussel om de definitie van plastic in de wet op te rekken. ", -5, 10, 17, 0, 18), 
-"answerB": new Answer(20.2, "Je vraagt je beste chemici om een plastic-vrije shampoo te creëren.", 10, -10, 17, 0, 18), 
+"answerA": new Answer(20.1, "Je stuurt je slimste lobbyisten naar Brussel om de definitie van plastic in de wet op te rekken. ", -5, 10, 17, 18), 
+"answerB": new Answer(20.2, "Je vraagt je beste chemici om een plastic-vrije shampoo te creëren.", 10, -10, 17, 18), 
 "answerC": null,
 "audio": null, "animation": bounceHulpButton},
 
 //Fossiel home
 {"id": 21, "text": "Memo van marketing: mensen wassen minder vaak hun handen - jouw zeep wordt minder verkocht. Wat doe je?", 
-"answerA": new Answer(21.1, "Je start een campagne over hygiene.", -5, 10, 18, 0, 18), 
-"answerB": new Answer(21.2, "Je ontwikkelt een krachtiger wasmiddel dat kleding langer schoon houdt", 5, -10, 18, 0, 18), 
+"answerA": new Answer(21.1, "Je start een campagne over hygiene.", -5, 10, 18, 18), 
+"answerB": new Answer(21.2, "Je ontwikkelt een krachtiger wasmiddel dat kleding langer schoon houdt", 5, -10, 18, 18), 
 "answerC": null,
 "audio": "audio/duck.mp3", "animation": animateMarketingMan},
 
 //Fossiel eind
 {"id": 22, "text": "Amnesty International bewijst dat er volop kinderarbeid plaatsvindt op palmolieplantages waar jij inkoopt. Jouw reactie:", 
-"answerA": new Answer(22.1, "\'De plantages zijn niet van ons: de Indonesische regering is verantwoordelijk\'", -10, -5, 19, 0, 23), 
-"answerB": new Answer(22.2, "\‘De beschuldiging van Amnesty is onbewezen maar we verwelkomen de kritiek\’", -5, 10, 19, 0, 23), 
-"answerC": new Answer(22.3, "\‘Alle relaties met beschuldigde plantagehouders worden stopgezet tot tegendeel bewezen is\’",  10, -10, 19, 0, 23),
+"answerA": new Answer(22.1, "\'De plantages zijn niet van ons: de Indonesische regering is verantwoordelijk\'", -10, -5, 19, 23), 
+"answerB": new Answer(22.2, "\‘De beschuldiging van Amnesty is onbewezen maar we verwelkomen de kritiek\’", -5, 10, 19, 23), 
+"answerC": new Answer(22.3, "\‘Alle relaties met beschuldigde plantagehouders worden stopgezet tot tegendeel bewezen is\’",  10, -10, 19, 23),
 "audio": null, "animation": bounceHulpButton},
 
 {"id": 23, "text": "\'Palmolie doodt orang-oetans,\’ stelt Greenpeace. Wat doe je?", 
-"answerA": new Answer(23.1, "Je verhoogt het budget van je PR-afedeling met 1 miljoen", -5, 5, 22, 0, 100), 
-"answerB": new Answer(23.2, "Je verhoogt het budget van je PR-afedeling met 20 miljoen", -5, 10, 22, 0, 100), 
-"answerC": new Answer(23.3, "Je sleept Greenpeace voor de rechter", -5, -5, 22, 0, 100),
+"answerA": new Answer(23.1, "Je verhoogt het budget van je PR-afedeling met 1 miljoen", -5, 5, 22, 100), 
+"answerB": new Answer(23.2, "Je verhoogt het budget van je PR-afedeling met 20 miljoen", -5, 10, 22, 100), 
+"answerC": new Answer(23.3, "Je sleept Greenpeace voor de rechter", -5, -5, 22, 100),
 "audio": "audio/monkey.mp3", "animation": null},
 
 //Duurzaam eind
 {"id": 24, "text": "Het gaat zo slecht met je bedrijfsvoering dat een concurrent dreigt met een vijandelijke overname. Wat doe je?", 
-"answerA": new Answer(24.1, "Je stapt op.", 0, 0, 20, 0, 100), 
-"answerB": new Answer(24.2, "Je start een crowdfunding-campagne om je groene koers door te kunnen zetten.", 10, 5, 20, 0, 25), 
+"answerA": new Answer(24.1, "Je stapt op.", 0, 0, 20, 100), 
+"answerB": new Answer(24.2, "Je start een crowdfunding-campagne om je groene koers door te kunnen zetten.", 10, 5, 20, 25), 
 "answerC": null,
 "audio": null, "animation": null},
 
 {"id": 25, "text": "De misstanden in de palmoliesector houden aan, het lukt je niet om duurzame palmolie te garanderen. Wat nu?", 
-"answerA": new Answer(25.1, "Je verwijdert palmolie uit al je producten", 10, -10, 0, 0, 100), 
-"answerB": new Answer(25.2, "Je stapt over op raapzaadolie uit de EU", 1, 0, 0, 0, 100), 
+"answerA": new Answer(25.1, "Je verwijdert palmolie uit al je producten", 10, -10, 0, 100), 
+"answerB": new Answer(25.2, "Je stapt over op raapzaadolie uit de EU", 1, 0, 0, 100), 
 "answerC": null,
 "audio": null, "animation": null},
 
 //Tweede optie voor vraag 16:
 {"id": 26, "text": "Het gaat goed met je bedrijf, maar de wereld gaat naar de knoppen. Wat doe je?", 
-"answerA": new Answer(50.1, "Je houdt je koers vast.", 1, -1, 0, 0, 100), 
-"answerB": new Answer(50.2, "Je besluit dat je voor einde van de wereld liever op een strand ligt en stapt op.", 5, -5, 0, 0, 100), 
-"answerC": new Answer(50.3, "Je past je strategie aan. Dan maar wat minder winst", 10, -10, 0, 0, 100),
+"answerA": new Answer(50.1, "Je houdt je koers vast.", 1, -1, 0, 100), 
+"answerB": new Answer(50.2, "Je besluit dat je voor einde van de wereld liever op een strand ligt en stapt op.", 5, -5, 0, 100), 
+"answerC": new Answer(50.3, "Je past je strategie aan. Dan maar wat minder winst", 10, -10, 0, 100),
 "audio": null, "animation": null}
 ];
 
@@ -445,47 +443,26 @@ function colorGlobe(number) {
 }
 
 function processAnswer(answer) {
-	var state = states[answer.delay] ? addToState(answer, states[answer.delay]) : createNewState(answer);
-  
-	function createNewState(answer) {
-		return new State(answer.earth, answer.business, [answer.news_id]);
-	}
-
-	function addToState(answer, old) {
-	var ids = old.news_ids
-	ids.push(answer.news_id);
-		return new State(old.earth + answer.earth, old.business + answer.business, ids);
-	}
-  
-  //add state back to array
-  states[answer.delay] = state;
-  updateState();
+	var state = new State(answer.earth, answer.business, answer.news_id);
+  	updateState(state);
 }
 
 
-function updateState(){
+function updateState(current_state){
 	function updateNewsBanner(state) {
 		var banner = " BREAKING NEWS -- ";
-		if (current_state.news_ids.length > 1) {
-			oldNews = banner + newsArray[current_state.news_ids[1]].text;
-
-			newsText.select("text[id='txt1']").attr({"text": oldNews});
-			newsText.select("text[id='txt2']").attr({"text": banner + newsArray[current_state.news_ids[0]].text});
-
-		} else if (current_state.news_ids.length > 0) {
-			var new_str = banner + newsArray[current_state.news_ids[0]].text;
+		if (current_state.news_id) {
+			var new_str = banner + newsArray[current_state.news_id].text;
 			newsText.select("text[id='txt1']").attr({"text": oldNews});
 			newsText.select("text[id='txt2']").attr({"text": new_str});
 			oldNews = new_str;
+
 		}
 	}
 
 	function updateGlobe(points) {
 		var old_state = earth_state;
 
-
-		
-		console.log("globe points" + points);
 		if (points > 18) {
 			showGlobe(0);
 			colorGlobe(0);
@@ -553,7 +530,6 @@ function updateState(){
 		});
 	}
 	
-	var current_state = states.shift();
 	if (current_state !=  null) {
 		global_state.earth += current_state.earth;
 		global_state.business += current_state.business;
@@ -561,7 +537,7 @@ function updateState(){
 		updateGlobe(global_state.earth);
 		flickerPlanks(current_state.earth, current_state.business);
 
-		if (current_state.news_ids.length > 0) {
+		if (current_state.news_id) {
 			updateNewsBanner(current_state);
 		}
 	}
@@ -713,13 +689,6 @@ function animateMoveDown(elem){
 	});	
 }
 
-function gameOver() {
-	displayPopup("Game Over", 
-		"Terwijl jij zat te treuzelen is de wereld allang vergaan. Probeer het nog een keer!", function (){
-			document.getElementById('popup').style.display = "none";
-			restartGame();
-		});
-}
 
 function animateMarketingMan() {
 	animateMoveDown(m);
@@ -772,7 +741,6 @@ function bounceHulpButton() {
 //------------------------------------TIMER------------------------------------------
 function restartGame() {
 	global_state = new State(5, 5, []),
- 	states = [],
  	selected_question = 0,
  	foodDone = false,
  	homeDone = false,
