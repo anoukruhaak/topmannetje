@@ -366,7 +366,7 @@ function displayQuestion(id) {
 	  el.style.opacity = 1;
 
 	  (function fade() {
-	    if ((el.style.opacity -= .1) < 0) {
+	    if ((el.style.opacity -= .05) < 0) {
 	      el.style.display = 'none';
 	      el.classList.add('is-hidden');
 	    } else {
@@ -386,7 +386,7 @@ function displayQuestion(id) {
 
 	  (function fade() {
 	    var val = parseFloat(el.style.opacity);
-	    if (!((val += .1) > 1)) {
+	    if (!((val += .09) > 1)) {
 	      el.style.opacity = val;
 	      requestAnimationFrame(fade);
 	    }
@@ -428,7 +428,7 @@ function displayQuestion(id) {
 		}
 		var el = document.querySelector('.js-fade');
 		fadeIn(el);
-	}, 600);
+	}, 700);
 };
 
 
