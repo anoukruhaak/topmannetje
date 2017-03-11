@@ -19,6 +19,7 @@
  	plank_fabriek = s.select("rect[id='profit-score-bg']"),
  	oldNews = "",
  	plank_color = "#5b5447",
+ 	tm_blue = "#5181a9",
  	tm_dark_green = "#60795b",
  	tm_light_green = "#71956c",
  	tm_red = "#e0421d",
