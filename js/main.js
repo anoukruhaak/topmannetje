@@ -15,8 +15,8 @@
  	fabriek_kl = s.select("g[id='fabriek-klein']"),
  	fabriek_mi = s.select("g[id='fabriek-midden']"),
  	newsText = s.select("g[id='news-tekst']"),
- 	plank_globe = s.select("path[id='plank-globe']"),
- 	plank_fabriek = s.select("path[id='plank-fabriek']"),
+ 	plank_globe = s.select("g[id='plank-globe']"),
+ 	plank_fabriek = s.select("g[id='plank-fabriek']"),
  	oldNews = "",
  	plank_color = "#b6ab99";
 
