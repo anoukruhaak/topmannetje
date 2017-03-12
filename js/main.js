@@ -513,6 +513,14 @@ function processAnswer(answer) {
   	updateState(state);
 }
 
+function updateScores() {
+	var score_earth = global_state.earth * 8099,
+		score_factory = global_state.business * 8099;
+
+	s.select("text[id='profit-text']").attr({"text": "PROFIT: " + score_factory});
+	s.select("text[id='planet-text']").attr({"text": "PLANET: " + score_earth});
+
+}
 
 function updateState(current_state){
 	function updateNewsBanner(state) {
@@ -601,6 +609,7 @@ function updateState(current_state){
 		global_state.business += current_state.business;
 		updateBusiness(global_state.business);
 		updateGlobe(global_state.earth);
+		updateScores();
 		flickerPlanks(current_state.earth, current_state.business);
 
 		if (current_state.news_id) {
