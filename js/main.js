@@ -208,7 +208,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "audio": null, "animation": bounceHulpButton},
 
 {"id": 18, "text": "Welke divisie pas je als eerste aan?", 
-"answerA": new Answer(18.1, "Voeding", 0, 0, 22, 0, 19), 
+"answerA": new Answer(18.1, "Voeding", 0, 0, 22, 19), 
 "answerB": new Answer(18.2, "Cosmetica en verzorgingsproducten", 0, 0, 22, 20), 
 "answerC": new Answer(18.3, "Wasmiddelen en reiniging", 0, 0, 22, 21),
 "audio": null, "animation": null},
@@ -274,19 +274,39 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 function findNextQuestion(next_qid, old_qid) {
 	
 	function handleCategoryFinished(qid) {
-		if (homeDone && careDone && foodDone) {
+		if (!homeDone && !careDone && !foodDone){
+			displayQuestion(next_qid);
+
+		}else if (homeDone && careDone && foodDone) {
 			console.log("earth: " + global_state.earth + "bizz" + global_state.business);
 			//calculate points
 			if (global_state.earth > 15 && global_state.business <5) {
 				//too green
-				return 24;
+				displayQuestion(24);
 			} else if (global_state.earth < 5) {
-				return 22;
+				displayQuestion(22);
 			} else {
-				return 13;
+				displayQuestion(13);
 			}
+		} else if (!homeDone) {
+			var next = (qid === 3 || global_state.earth > 10) ? 11 : 21;
+			displayPopup("Goed zo!", "Op naar de huishoudelijke producten!", function () {
+			displayQuestion(next);
+			document.getElementById('popup').style.display = "none";
+			})
+		} else if (!careDone){
+			var next = (qid === 3 || global_state.earth > 10) ? 9 : 20;
+			displayPopup("Goed zo!", "Tijd om de cosmetica en verzorgingstak van je bedrijf onder de loep te nemen!", function () {
+			displayQuestion(next);
+			document.getElementById('popup').style.display = "none";
+			})
+		} else {
+			var next = (qid === 3 || global_state.earth > 10) ? 4 : 19;
+			displayPopup("Goed zo!", "Tijd om je te verdiepen in de voedingsproducten!", function () {
+			displayQuestion(next);
+			document.getElementById('popup').style.display = "none";
+			})
 		}
-		return (qid === 3) ? 3 : 18;
 	}
 
 	function updateCategoriesFinished(old_qid){
@@ -300,6 +320,8 @@ function findNextQuestion(next_qid, old_qid) {
 		}
 	}
 
+	console.log("NEXT: "+ next_qid + "OLD: " + old_qid);
+	//Redirect to wrong gender
 	if (next_qid === 0) {
 		console.log("wrong gender");
 
@@ -307,25 +329,23 @@ function findNextQuestion(next_qid, old_qid) {
 			displayQuestion(0);
 			document.getElementById('popup').style.display = "none";
 		})
+	//We reached the end
 	} else if (next_qid === 100 ) {
 		goToLoading();
+	//End of the green route
 	}else if (next_qid === 16) {
 		if (global_state.earth > global_state.business) {
 			displayQuestion(next_qid);
 		} else {
 			displayQuestion(26);
 		}
+	//Normal next question
 	}else if (next_qid != 3 && next_qid != 18){
 		displayQuestion(next_qid);
+	//Return to category selection
 	} else {
 		updateCategoriesFinished(old_qid);
-		var id = handleCategoryFinished(next_qid);
-
-		if(id == 3 || id == 18) {
-			displayDashboard(id);
-		} else {
-			displayQuestion(id);
-		}
+		handleCategoryFinished(next_qid);
 	}
 }
 
