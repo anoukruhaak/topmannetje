@@ -38,7 +38,7 @@ h1 {
   top:3%;
   width: 70%;
   height:30%;
-  transform: translate(10%, -20%);
+  transform: translate(20%, -20%);
   text-align: center;
 }
 
@@ -63,7 +63,7 @@ h1 {
 .antwoord {
   pointer-events: none;
   width: 50%;
-  transform: translate(40%, 0%);
+  transform: translate(50%, 0%);
   text-align: left;
   font-size: 0.9em;
   font-weight: 400;
