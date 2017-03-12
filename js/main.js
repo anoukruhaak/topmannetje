@@ -383,6 +383,21 @@ function colorButton(button, color){
 	button.select("rect").attr({"fill": color});
 }
 
+function displayFirstQuestion() {
+	selected_question = 0;
+		resetButtons();
+		var txt = questions[selected_question].text,
+			a = questions[selected_question].answerA.text,
+			b = questions[selected_question].answerB.text,
+			c = questions[selected_question].answerC;
+		document.getElementById('vraag').innerHTML = txt;
+		document.getElementById('antw_a').innerHTML = a;
+		document.getElementById('antw_b').innerHTML = b;
+		document.getElementById("antw_c").style.visibility = "visible";
+		document.getElementById('antw_c').innerHTML = c.text;
+		answer_c.attr({display: ''});
+}
+
 function displayQuestion(id) {
 
 	// fade out
@@ -719,7 +734,7 @@ function setUp(){
 		
 	};
 	moveNewsBanner();
-	displayQuestion(0);
+	displayFirstQuestion();
 };
 
 
