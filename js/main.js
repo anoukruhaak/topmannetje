@@ -773,10 +773,51 @@ function animateClouds(){
 			  });
 		});
 	}
-	wolken = [s.select('#wolk-1'), s.select('#wolk-2'), s.select('#wolk-3')];
+
+	function animateCloudDown(index, wolk){
+		var wolkStartMatrix = new Snap.Matrix(),
+		wolkMidMatrix = new Snap.Matrix();
+		wolkStartMatrix.translate(0, 5);
+		wolkMidMatrix.translate(0, -5);
+
+		wolk.animate({opacity: 0, transform: wolkStartMatrix}, 1200*index, mina.easeinout, function () {
+			wolk.animate({transform: wolkMidMatrix}, 1, mina.easeout, function () {
+				wolk.animate({opacity: 1}, 2000, mina.easeinout, function () {animateCloud(index, wolk);});
+			  });
+		});
+	}
+
+	function animateFlamesOne() {
+		var vlam1 = s.select("#vlam-1");
+
+		vlam1.animate({opacity: 0.7}, 5000, mina.bounce, function () {
+			vlam1.animate({opacity: 1}, 500, mina.bounce, function () {
+				{animateFlamesOne();};
+			  });
+		});
+	}
+
+	function animateFlamesTwo() {
+		var vlam2 = s.select("#vlam-2");
+		vlam2.animate({opacity: 1}, 9000, mina.bounce, function () {
+			vlam2.animate({opacity: 0.6}, 1000, mina.bounce, function () {
+				{animateFlamesTwo();};
+			  });
+		});
+	}
+
+	wolken = [s.select('#wolk-1'), s.select('#wolk-2'), s.select('#wolk-3'), s.select("#w3-wolk-1")];
 	wolken.forEach( function(wolk){
 		animateCloud(getRandomInt(1,5), wolk);
 	});
+
+	wolken = [s.select("#w3-wolk-3"), s.select("#w3-wolk-2")];
+	wolken.forEach( function(wolk){
+		animateCloudDown(getRandomInt(1,5), wolk);
+	});
+
+	animateFlamesOne();
+	animateFlamesTwo();
 };
 
 function animateMoveDown(elem){
