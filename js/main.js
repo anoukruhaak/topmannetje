@@ -547,8 +547,8 @@ function processAnswer(answer) {
 }
 
 function updateScores() {
-	var score_earth = global_state.earth,
-		score_factory = global_state.business;
+	var score_earth = (global_state.earth) * 200,
+		score_factory = (global_state.business ) * 200;
 
 	s.select("text[id='profit-text']").attr({"text": "PROFIT: " + score_factory});
 	s.select("text[id='planet-text']").attr({"text": "PLANET: " + score_earth});
@@ -560,39 +560,39 @@ function updateState(current_state){
 		var banner = " BREAKING NEWS -- ";
 		if (current_state.news_id) {
 			var new_str = banner + newsArray[current_state.news_id].text;
-			newsText.select("text[id='txt1']").attr({"text": oldNews});
-			newsText.select("text[id='txt2']").attr({"text": new_str});
+			newsText.select("text[id='txt1']").attr({"text": new_str});
 			oldNews = new_str;
-
+			//animate moving of banner
+			moveNewsBanner();
 		}
 	}
 
 	function updateGlobe(points) {
 		var old_state = earth_state;
 
-		if (points > 18) {
+		if (points > 35) {
 			showGlobe(0);
 			colorGlobe(0);
 			earth_state = 1;
 
-		} else if (points > 13) {
+		} else if (points > 22) {
 			showGlobe(1);
 			colorGlobe(0);
 			earth_state = 2;
 
-		} else if (points > 8){
+		} else if (points > 10){
 			showGlobe(1);
 			colorGlobe(1);
 			earth_state = 3;
 		}
 
-		else if (points > 3) {
+		else if (points > 5) {
 			showGlobe(2);
 			colorGlobe(1);
 			earth_state = 4;
 		}
 
-		else if (points > -1) {
+		else if (points > -5) {
 			showGlobe(2);
 			colorGlobe(2);
 			earth_state = 5;
@@ -607,11 +607,11 @@ function updateState(current_state){
 	function updateBusiness(points) {
 		var old_state = business_state;
 		
-		if (points > 9) {
+		if (points > 20) {
 			showFactories(true, true, true);
 			business_state = 1;
 
-		} else if (points < 4) {
+		} else if (points < -8) {
 			showFactories(true, false, false);
 			business_state = 3;
 		} else {
@@ -678,6 +678,21 @@ function breakNews () {
 	anim3();
 };
 
+function moveNewsBanner() {
+	newsText.stop();
+	var startMatrix = new Snap.Matrix(),
+	midMatrix = new Snap.Matrix();
+	newsText.transform(startMatrix);
+	startMatrix.translate(780, 0);
+	midMatrix.translate(-780, 0);
+
+	newsText.animate({opacity: 0.7, transform: midMatrix}, 15000, mina.linear, function () {
+		newsText.animate({opacity: 1.0, transform: startMatrix}, 1, mina.easeout, function () {
+
+		});
+	});
+};
+
 
 function setUp(){
 	setElementAboveScreen(d);
@@ -686,12 +701,10 @@ function setUp(){
 
 	help.mouseover(animateHelpButton,resetSVG);
 	koffer.drag();
-	newsText.select("text[id='txt1']").attr({"font-style": "bold", "color": "red"});
-	newsText.select("text[id='txt2']").attr({"font-style": "bold", "color": "red"});
+	newsText.select("text[id='txt1']").attr({"color": tm_red});
 	
 	oldNews = "BREAKING NEWS -- Unilever op zoek naar nieuwe topman!"
 	newsText.select("text[id='txt1']").attr({"text": oldNews});
-	newsText.select("text[id='txt2']").attr({"text": oldNews});
 
 	showFactories(true, true, false);
 	showGlobe(2);
@@ -736,22 +749,6 @@ function setUp(){
 		}
 	};
 
-	function moveNewsBanner () {
-		var startMatrix = new Snap.Matrix(),
-		midMatrix = new Snap.Matrix();
-		newsText.transform(startMatrix);
-		startMatrix.translate(1000, 0);
-		midMatrix.translate(-1000, 0);
-
-		newsText.stop();
-		newsText.animate({opacity: 0.7, transform: midMatrix}, 10000, mina.linear, function () {
-			newsText.animate({opacity: 1.0, transform: startMatrix}, 1, mina.easeout, function () {
-				moveNewsBanner();
-			});
-		});
-
-		
-	};
 	moveNewsBanner();
 	displayFirstQuestion();
 };
@@ -862,14 +859,14 @@ function restartGame() {
 
 //-------------------------------------------GOTO-------------------------------------------
 function goToLoading() {
-	if (global_state.earth > 15) {
+	if (global_state.business < 3) {
 		window.location.href = "appelboer.html";
-	} else if (global_state.earth > 10 && global_state.business > 5){
-		window.location.href = "duurzaam.html";
-	} else if (global_state.earth > 5 && global_state.business > 8) {
-		window.location.href = "reputatie.html";
-	} else {
+	} else if (global_state.earth < 3){
 		window.location.href = "speel_op_zeker.html";
+	} else if (global_state.earth > global_state.business) {
+		window.location.href = "duurzaam.html";
+	} else {
+		window.location.href = "reputatie.html";
 	}
 }
 
