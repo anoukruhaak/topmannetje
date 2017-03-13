@@ -7,7 +7,7 @@
  	koffer = s.select("g[id='koffer']"),
  	globe = s.select("g[id='globe']"),
  	globe_water = globe.select("circle[id='globe-water']"),
- 	globe_bg = globe.select("path[id='globe-bg']"),
+ 	globe_bg = globe.select("g[id='globe-bg']"),
  	globe_clouds = s.select("g[id='w3-wolk']"),
  	globe_trees = s.select("g[id='boompjes']"),
  	globe_flames = s.select("g[id='vlam']"),
@@ -537,7 +537,11 @@ function colorGlobe(number) {
 	var blue = ["#5181A9", "#5181a9", "#4D7184", "#485A68"][number],
 	earth = ["#54bb6c", "#ead7b7", "#D2C0A7", "#8A7570"][number];
 
-	globe_bg.animate({fill: earth}, 2000, mina.easeinout, null);
+	var paths = globe_bg.selectAll("path");
+	paths.forEach( function(gl){
+		gl.animate({fill: earth}, 2000, mina.easeinout, null);
+	});
+
 	globe_water.animate({fill: blue}, 2000, mina.easeinout, null);
 }
 
