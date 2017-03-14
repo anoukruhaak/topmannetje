@@ -91,7 +91,7 @@ new NewsText(21, "Nieuwe topman Unilever wil hogere marges en meer winst."),
 new NewsText(22, "Unilever verwelkomt nieuwe topman."),
 ];
 
-var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answerA": new Answer(0.1, "Man", 0, 0, 20, 1), 
+var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answerA": new Answer(0.1, "Man", -1, 1, 20, 1), 
 "answerB": new Answer(0.2, "Vrouw", 0, 0, 20, 0), 
 "answerC": new Answer(0.3, "Geen van beiden.", 0, 0, 20, 0),
 "audio": null, "animation": null},
@@ -131,21 +131,21 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 
 {"id": 6, "text": "Het duurzame ijsmerk Jen & Berry’s is te koop. Wil je het overnemen?", 
 "answerA": new Answer(6.1, "Ja.", -5, 10, 0, 7), 
-"answerB": new Answer(6.2, "Nee", 5, -10, 0, 8), 
+"answerB": new Answer(6.2, "Nee", 5, -10, 8, 8), 
 "answerC": null,
 "audio": null, "animation": null},
 
 {"id": 7, "text": "Zeker weten? IJsjes zijn bevroren blokjes zuivel en suiker.", 
 "answerA": new Answer(7.1, "Daar verzin ik wel wat op", -5, 5, 0, 8), 
-"answerB": new Answer(7.2, "Oeps, dan toch maar niet", 5, -5, 0, 8), 
+"answerB": new Answer(7.2, "Oeps, dan toch maar niet", 5, -5, 8, 8), 
 "answerC": null,
 "audio": null, "animation": bounceHulpButton},
 
 //Animation: verschuif de koffer met certificaten.
 {"id": 8, "text": "De groenten in je soep en pastasaus moeten duurzaam. Hoe pak je dat aan?", 
-"answerA": new Answer(8.3, "Ik vergroen op mijn eigen manier en bedenk een nieuw keurmerk.", -5, 5, 5, 3), 
+"answerA": new Answer(8.3, "Ik vergroen op mijn eigen manier en bedenk een nieuw keurmerk.", -5, 5, 13, 3), 
 "answerB": new Answer(8.2, "Ik verplicht leveranciers biologisch te produceren.", 5, -5, 0, 3), 
-"answerC": new Answer(8.1, "Ik ga in zee met veel kleine lokaal werkende boeren.", 5, -5, 0, 3), 
+"answerC": new Answer(8.1, "Ik ga in zee met veel kleine lokaal werkende boeren.", 5, -5, 8, 3), 
 "audio": null, "animation": null},
 
 //Personal Groen
@@ -189,9 +189,9 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "audio": "audio/duck.mp3", "animation": animateMarketingMan},
 
 {"id": 15, "text": "Greenpeace komt met een rapport over ontbossing door palmolieplantages waar jij inkoopt. Wat doe je?", 
-"answerA": new Answer(15.1, "Je haalt palmolie waar mogelijk uit je producten.", 5, -5, 0, 16), 
-"answerB": new Answer(15.2, "Je bedankt voor het rapport en stelt een samenwerking voor.", -5, 5, 0, 16), 
-"answerC": new Answer(15.2, "Je kaart de kwestie aan bij de volgende vergadering van de Roundtable for Sustainable Palm Oil.", -5, 5, 0, 16),
+"answerA": new Answer(15.1, "Je haalt palmolie waar mogelijk uit je producten.", 5, -5, 15, 16), 
+"answerB": new Answer(15.2, "Je bedankt voor het rapport en stelt een samenwerking voor.", -5, 5, 15, 16), 
+"answerC": new Answer(15.2, "Je kaart de kwestie aan bij de volgende vergadering van de Roundtable for Sustainable Palm Oil.", -5, 5, 15, 16),
 "audio": "audio/rain_forest.mp3", "animation": null},
 
 {"id": 16, "text": "Al die duurzaamheid is niet goed voor je balans. Je aandeelhouders zijn boos. Wat doe je?", 
@@ -273,8 +273,8 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "audio": null, "animation": null},
 
 {"id": 28, "text": "De misstanden in de palmoliesector houden aan, het lukt je niet om duurzame palmolie te garanderen. Wat nu?", 
-"answerA": new Answer(25.1, "Je verwijdert palmolie uit al je producten", 10, -10, 0, 100), 
-"answerB": new Answer(25.2, "Je stapt over op raapzaadolie uit de EU", 1, 0, 0, 100), 
+"answerA": new Answer(25.1, "Je verwijdert palmolie uit al je producten", 10, -10, 19, 100), 
+"answerB": new Answer(25.2, "Je stapt over op raapzaadolie uit de EU", 1, 0, 19, 100), 
 "answerC": null,
 "audio": null, "animation": null},
 
@@ -715,6 +715,17 @@ function setUp(){
 	updateScores();
 	colorGlobe(1);
 
+	document.getElementById("speel-button").onclick = function() { 
+			document.getElementById("start-vraag").style.display = "none";
+			document.getElementById("vraag").style.display = "block";
+			document.getElementById("antwoord-box").style.display = "block";
+			answer_a.attr({visibility:'visible'});
+			answer_b.attr({visibility:'visible'});
+			answer_c.attr({visibility:'visible'});
+
+            displayFirstQuestion();
+        };
+
 	function changeBackgroundColor(newColor, oldColor, surface) {
 		surface.animate({fill: newColor}, 200, mina.easeinout, function() {
 			surface.animate({fill: oldColor}, 200, mina.easeinout, null);
@@ -752,10 +763,9 @@ function setUp(){
 			findNextQuestion(next, selected_question);
 		}
 	};
-
 	moveNewsBanner();
-	displayFirstQuestion();
 };
+
 
 
 function animateClouds(){
