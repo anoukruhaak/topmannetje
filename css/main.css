@@ -147,7 +147,8 @@ h1 {
 }
 
 .start {
-  background: #a53015;
+/*  background: #a53015;*/
+  background: white;
 }
 
 .start-button {
