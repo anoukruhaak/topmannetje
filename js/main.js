@@ -57,7 +57,7 @@ class State {
 	}
 }
 
-var global_state = new State(5, 8, 0),
+var global_state = new State(5, 5, 0),
  	selected_question = 0,
  	foodDone = false,
  	homeDone = false,
@@ -901,7 +901,7 @@ function bounceHulpButton() {
 
 //------------------------------------TIMER------------------------------------------
 function restartGame() {
-	global_state = new State(8, 5, []),
+	global_state = new State(5, 5, []),
  	selected_question = 0,
  	foodDone = false,
  	homeDone = false,
