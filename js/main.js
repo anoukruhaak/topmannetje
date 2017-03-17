@@ -27,9 +27,10 @@
 
  // var d = Snap("#duurzaamheidsman"),
  // 	legs = d.select("g[id='been']");
- var d = Snap("#duurzaamheid"),
- 	 m = Snap("#marketing"),
- 	 r = s.select("g[id='rutte']");
+ var pop = Snap("#poppen"),
+ 	 d = pop.select("g[id='duurzaamheid']"),
+ 	 m = pop.select("g[id='marketing']"),
+ 	 r = pop.select("g[id='rutte']");
 
 class Answer {
 	constructor(id, text, earth, business, news_id, next) {
@@ -616,7 +617,7 @@ function updateState(current_state){
 			showFactories(true, true, true);
 			business_state = 1;
 
-		} else if (points < -8) {
+		} else if (points < 3) {
 			showFactories(true, false, false);
 			business_state = 3;
 		} else {
@@ -845,7 +846,7 @@ function animateMoveDown(elem){
 
 	elem.stop();
 	elem.attr({opacity: 0.5});
-	elem.animate({transform: startMatrix, opacity: 1}, 1800, mina.bounce, function () {
+	elem.animate({transform: startMatrix, opacity: 1}, 3000, mina.bounce, function () {
 		elem.animate({transform: endMatrix}, 4000, mina.easeout, function () {
 			elem.animate({opacity: 0}, 1, mina.easeinout, null);
 		});

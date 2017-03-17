@@ -55,6 +55,13 @@ h1 {
   top:0;
 }
 
+.pop-svg {
+  position: absolute;
+  z-index: 40;
+  top:0;
+  pointer-events: none;
+}
+
 .vraag {
   display: none;
   pointer-events: none;
@@ -77,7 +84,6 @@ h1 {
 
 .man-svg {
   position: absolute;
-  z-index: 20;
   top:0;
   pointer-events: none;
   opacity: 0;
