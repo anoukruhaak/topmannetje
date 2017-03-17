@@ -567,6 +567,7 @@ function updateState(current_state){
 			newsText.select("text[id='txt1']").attr({"text": new_str});
 			oldNews = new_str;
 			//animate moving of banner
+			breakNews();
 			moveNewsBanner();
 		}
 	}
@@ -676,10 +677,11 @@ function resetSVG (){
 function breakNews () {
 	bg = s.select("rect[id='achtergrond']");
 
-	var anim2 = function () {bg.animate({fill: "white"}, 10000, mina.easeinout, anim3)};
-	var anim1 = function () {bg.animate({fill: "lemonchiffon", filter: Snap("#glow")}, 200, mina.easeinout, anim2)};
-	var anim3 = function () {bg.animate({fill: "orange", filter: Snap("#glow")}, 200, mina.easeinout, anim1)};
-	anim3();
+	var anim1 = function () {bg.animate({fill: "white"}, 1000, mina.bounce, null)};
+	var anim2 = function () {bg.animate({fill: "#f4ad26", filter: Snap("#glow")}, 800, mina.bounce, anim1)};
+	var anim3 = function () {bg.animate({fill: "white", filter: Snap("#glow")}, 800, mina.bounce, anim2)};
+	var anim4 = function () {bg.animate({fill: "#ffde54", filter: Snap("#glow")}, 800, mina.bounce, anim3)};
+	anim4();
 };
 
 function moveNewsBanner() {
