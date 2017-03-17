@@ -155,10 +155,10 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerC": new Answer(9.3, "Dit is niet een probleem dat ik kan oplossen.", -10, 10, 0, 10),
 "audio": "audio/duck.mp3", "animation": animateSustainableMan},
 
-{"id": 10, "text": "Harde plastic ‘microbeads’ in je scrub producten komen in de zee en worden opgegeten door vissen. NGOs en consumenten zijn boos. Wat doe je?", 
-"answerA": new Answer(10.1, "Je belooft al het plastic uit je cosmetica producten te verwijderen.", 10, -10, 6, 3), 
+{"id": 10, "text": "Harde plastic ‘microbeads’ in je scrubproducten komen in de zee en worden opgegeten door vissen. NGOs en consumenten zijn boos. Wat doe je?", 
+"answerA": new Answer(10.1, "Je belooft al het plastic uit je cosmeticaproducten te verwijderen.", 10, -10, 6, 3), 
 "answerB": new Answer(10.2, "Je stapt over op vloeibare plastics en claimt dat die minder schadelijk zijn.", -5, 5, 13, 3), 
-"answerC": new Answer(10.3, "Ik stuur mijn slimste lobbyisten naar Brussel om de definitie van 'duurzaam plastic' op te rekken.", -10, 10, 0, 3),
+"answerC": new Answer(10.3, "Je stuurt je slimste lobbyisten naar Brussel om de definitie van 'duurzaam plastic' op te rekken.", -10, 10, 0, 3),
 "audio": null, "animation": null},
 
 //Home Groen
@@ -184,8 +184,8 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 
 {"id": 14, "text": "Memo van je marketingmanager: de vraag naar luxe ijsjes neemt toe in Nigeria. Pak je die kans?", 
 "answerA": new Answer(14.1, "Natuurlijk: iedereen heeft recht op Magnums. Ik bestel alvast 20 duizend extra diepvriezers", -10, 10, 0, 15), 
-"answerB": new Answer(14.2, "Ik promoot ‘Jane and jerry’ vruchtenijs op waterbasis; zonder zuivel met lokaal fruit.", 5, 0, 0, 15), 
-"answerC": new Answer(14.3, "We bouwen onze ijs-divisie af", 10, -10, 10, 15),
+"answerB": new Answer(14.2, "Ik promoot ‘Jane & Jerry’ vruchtenijs op waterbasis; zonder zuivel met lokaal fruit.", 5, 0, 0, 15), 
+"answerC": new Answer(14.3, "We bouwen onze ijsdivisie af", 10, -10, 10, 15),
 "audio": "audio/duck.mp3", "animation": animateMarketingMan},
 
 {"id": 15, "text": "Greenpeace komt met een rapport over ontbossing door palmolieplantages waar jij inkoopt. Wat doe je?", 
@@ -229,7 +229,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 //Fossiel cosmetica
 {"id": 21, "text": "De EU stelt strengere eisen aan het gebruik van microplastics in cosmetica. Wat doe je?", 
 "answerA": new Answer(20.1, "Je stuurt je slimste lobbyisten naar Brussel om de definitie van plastic in de wet op te rekken. ", -5, 10, 17, 22), 
-"answerB": new Answer(20.2, "Je vraagt je beste chemici om een plastic-vrije shampoo te creëren.", 10, -10, 17, 22), 
+"answerB": new Answer(20.2, "Je vraagt je beste chemici om een plasticvrije shampoo te creëren.", 10, -10, 17, 22), 
 "answerC": null,
 "audio": null, "animation": bounceHulpButton},
 
@@ -260,8 +260,8 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "audio": null, "animation": bounceHulpButton},
 
 {"id": 26, "text": "\'Palmolie doodt orang-oetans,\’ stelt Greenpeace. Wat doe je?", 
-"answerA": new Answer(23.1, "Je verhoogt het budget van je PR-afedeling met 1 miljoen", -5, 5, 22, 100), 
-"answerB": new Answer(23.2, "Je verhoogt het budget van je PR-afedeling met 20 miljoen", -5, 10, 22, 100), 
+"answerA": new Answer(23.1, "Je verhoogt het budget van je PR-afdeling met 1 miljoen", -5, 5, 22, 100), 
+"answerB": new Answer(23.2, "Je verhoogt het budget van je PR-afdeling met 20 miljoen", -5, 10, 22, 100), 
 "answerC": new Answer(23.3, "Je sleept Greenpeace voor de rechter", -5, -5, 22, 100),
 "audio": "audio/monkey.mp3", "animation": null},
 
