@@ -36,6 +36,16 @@
  	 m = pop.select("g[id='marketing']"),
  	 r = pop.select("g[id='rutte']");
 
+var Sounds = {
+    duck: new Audio('./audio/duck.mp3'),
+    applause: new Audio('./audio/applause.mp3'),
+    india: new Audio('./audio/india.mp3'),
+    rainForest: new Audio('./audio/rain_forest.mp3'),
+    rutte: new Audio('./audio/voicemail.mp3'),
+    monkey: new Audio('./audio/monkey.mp3'),
+    children: new Audio('./audio/children.mp3')
+};
+
 class Answer {
 	constructor(id, text, earth, business, news_id, next) {
 		this.id = id;
@@ -105,7 +115,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(1.1, "Ik gooi het roer om en kies voor een volledig duurzame productie", 5, -5, 0, 2), 
 "answerB": new Answer(1.2, "Ik kan dit niet oplossen. We onderzoeken vergroening maar draaien voorlopig op de oude voet door.", -5, 5, 2, 17), 
 "answerC": null, 
-"audio": "audio/applause.mp3", "animation": null}, 
+"audio": "applause", "animation": null}, 
 
 //Start Groen
 {"id": 2, "text": "Mooi. Laat je de fabrieken volledig draaien op duurzame energie?", 
@@ -126,7 +136,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(4.1, "Voor 2020 alle vlees en zuivel te vervangen door veganistische alternatieven", 8, -10, 11, 6), 
 "answerB": new Answer(4.2, "Een vegetarische variant op de Unox-worst te introduceren", 3, -5, 4, 5),
 "answerC": new Answer(4.3, "Samen te werken met het Vegetarisch Verbond, maar niet minder vlees te verkopen.",-10, 10, 0, 6),
-"audio": "audio/duck.mp3", "animation": animateSustainableMan},
+"audio": "duck", "animation": animateSustainableMan},
 
 {"id": 5, "text": "Weet je het zeker? Unox is cultureel erfgoed!", 
 "answerA": new Answer(5.1, "Klopt, ik kies voor zeker. Unox blijft Unox.", -10, 5, 0, 6), 
@@ -158,7 +168,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(9.1, "Ik start een campagne om mensen te overtuigen minder lang te douchen.", 5, 5, 0, 10), 
 "answerB": new Answer(9.2, "Ik ontwikkel droogshampoo, daar is geen water voor nodig.", 7, -5, 6, 10), 
 "answerC": new Answer(9.3, "Dit is niet een probleem dat ik kan oplossen.", -10, 10, 0, 10),
-"audio": "audio/duck.mp3", "animation": animateSustainableMan},
+"audio": "duck", "animation": animateSustainableMan},
 
 {"id": 10, "text": "Harde plastic ‘microbeads’ in je scrubproducten komen in de zee en worden opgegeten door vissen. NGOs en consumenten zijn boos. Wat doe je?", 
 "answerA": new Answer(10.1, "Je belooft al het plastic uit je cosmeticaproducten te verwijderen.", 10, -10, 6, 3), 
@@ -171,13 +181,13 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(11.2, "Nee, als bedrijf is dit niet mijn taak.", -5, -5, 0, 12), 
 "answerB": new Answer(11.1, "Ja, het is een goed doel én het versterkt mijn merk.", 5, 5, 10, 12), 
 "answerC": new Answer(11.3, "Natuurlijk. En ik besteed 1 procent van mijn zeepwinst aan extra gezondheidszorg.", 5, -5, 0, 12),
-"audio": "audio/children.mp3", "animation": null},
+"audio": "children", "animation": null},
 
 {"id": 12, "text": "India is een veelbelovende markt, maar veel Indiërs kunnen de grote pakken waspoeder nog niet betalen.", 
 "answerA": new Answer(12.2, "Ik kom met kleine wegwerpverpakkingen voor een enkele wasbeurt", -10, 10, 15, 3),  
 "answerB": new Answer(12.1, "Ik verander niets aan mijn verpakkingen. Dan maar iets minder omzet.", 10, -10, 0, 3),
 "answerC": new Answer(12.3, "Losse verpakkingen zijn overbodig. Ik verkoop via hervulbare containers.", 5, -5, 0, 3),
-"audio": "audio/india.mp3", "animation": null},
+"audio": "india", "animation": null},
 
 
 //Eind groen
@@ -191,13 +201,13 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(14.1, "Natuurlijk: iedereen heeft recht op Magnums. Ik bestel alvast 20 duizend extra diepvriezers", -10, 10, 0, 15), 
 "answerB": new Answer(14.2, "Ik promoot ‘Jane & Jerry’ vruchtenijs op waterbasis; zonder zuivel met lokaal fruit.", 5, 0, 0, 15), 
 "answerC": new Answer(14.3, "We bouwen onze ijsdivisie af", 10, -10, 10, 15),
-"audio": "audio/duck.mp3", "animation": animateMarketingMan},
+"audio": "duck", "animation": animateMarketingMan},
 
 {"id": 15, "text": "Greenpeace komt met een rapport over ontbossing door palmolieplantages waar jij inkoopt. Wat doe je?", 
 "answerA": new Answer(15.1, "Je haalt palmolie waar mogelijk uit je producten.", 5, -5, 15, 16), 
 "answerB": new Answer(15.2, "Je bedankt voor het rapport en stelt een samenwerking voor.", -5, 5, 15, 16), 
 "answerC": new Answer(15.2, "Je kaart de kwestie aan bij de volgende vergadering van de Roundtable for Sustainable Palm Oil.", -5, 5, 15, 16),
-"audio": "audio/rain_forest.mp3", "animation": null},
+"audio": "rainForest.mp3", "animation": null},
 
 {"id": 16, "text": "Al die duurzaamheid is niet goed voor je balans. Je aandeelhouders zijn boos. Wat doe je?", 
 "answerA": new Answer(16.1, "Je ontslaat je VP.", 5, -5, 0, 100), 
@@ -249,13 +259,13 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(21.1, "Je start een campagne over hygiene.", -5, 10, 18, 24), 
 "answerB": new Answer(21.2, "Je ontwikkelt een krachtiger wasmiddel dat kleding langer schoon houdt", 5, -10, 18, 24), 
 "answerC": null,
-"audio": "audio/duck.mp3", "animation": animateMarketingMan},
+"audio": "duck", "animation": animateMarketingMan},
 
 {"id": 24, "text": "Kans: De Wereldgezondheidsorganisatie kan diarree bij kinderen in Kenia voorkomen met een 'was je handen' campagne. Ga je zeep doneren?", 
 "answerA": new Answer(11.2, "Nee, als bedrijf is dit niet mijn taak.", -5, -5, 0, 18), 
 "answerB": new Answer(11.1, "Ja, het is een goed doel én het versterkt mijn merk.", 5, 5, 10, 18), 
 "answerC": new Answer(11.3, "Natuurlijk. En ik besteed 1 procent van mijn zeepwinst aan extra gezondheidszorg.", 5, -5, 0, 18),
-"audio": "audio/children.mp3", "animation": null},
+"audio": "children", "animation": null},
 
 //Fossiel eind
 {"id": 25, "text": "Amnesty International bewijst dat er volop kinderarbeid plaatsvindt op palmolieplantages waar jij inkoopt. Jouw reactie:", 
@@ -268,7 +278,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(23.1, "Je verhoogt het budget van je PR-afdeling met 1 miljoen", -5, 5, 22, 100), 
 "answerB": new Answer(23.2, "Je verhoogt het budget van je PR-afdeling met 20 miljoen", -5, 10, 22, 100), 
 "answerC": new Answer(23.3, "Je sleept Greenpeace voor de rechter", -5, -5, 22, 100),
-"audio": "audio/monkey.mp3", "animation": null},
+"audio": "monkey", "animation": null},
 
 //Duurzaam eind
 {"id": 27, "text": "Het gaat zo slecht met je bedrijfsvoering dat een concurrent dreigt met een vijandelijke overname. Wat doe je?", 
@@ -482,8 +492,7 @@ function displayQuestion(id) {
 		}
 
 		if (audio){
-			var file = new Audio(audio);
-			file.play();
+			playSound(audio);
 		}
 
 		if (animation) {
@@ -945,6 +954,12 @@ function goToLoading() {
 	} else {
 		window.location.href = "reputatie.html";
 	}
+}
+
+
+function playSound(name) {
+    Sounds[name].currentTime = 0;
+    Sounds[name].play();
 }
 
 setUp();
