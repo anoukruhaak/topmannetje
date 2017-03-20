@@ -238,10 +238,10 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(9.1, "Ik start een campagne om mensen te overtuigen minder lang te douchen.", 5, 5, 0, 18), 
 "answerB": new Answer(9.2, "Ik ontwikkel droogshampoo, daar is geen water voor nodig.", 7, -5, 6, 18), 
 "answerC": new Answer(9.3, "Dit is niet een probleem dat ik kan oplossen.", -10, 10, 0, 18),
-"audio": "audio/duck.mp3", "animation": null},
+"audio": null, "animation": null},
 
 //Fossiel home
-{"id": 23, "text": "Memo van marketing: mensen wassen minder vaak hun handen - jouw zeep wordt minder verkocht. Wat doe je?", 
+{"id": 23, "text": "Memo van marketing: mensen wassen minder vaak - jouw wasmiddel wordt minder verkocht. Wat doe je?", 
 "answerA": new Answer(21.1, "Je start een campagne over hygiene.", -5, 10, 18, 24), 
 "answerB": new Answer(21.2, "Je ontwikkelt een krachtiger wasmiddel dat kleding langer schoon houdt", 5, -10, 18, 24), 
 "answerC": null,
@@ -299,7 +299,7 @@ function findNextQuestion(next_qid, old_qid) {
 		}else if (homeDone && careDone && foodDone) {
 			console.log("earth: " + global_state.earth + "bizz" + global_state.business);
 			//calculate points
-			if (global_state.earth > 15 && global_state.business <5) {
+			if (global_state.earth > 20 && global_state.business <5) {
 				//too green
 				displayQuestion(27);
 			} else if (global_state.earth < 5) {
@@ -308,19 +308,19 @@ function findNextQuestion(next_qid, old_qid) {
 				displayQuestion(13);
 			}
 		} else if (!homeDone) {
-			var next = (qid === 3 || global_state.earth > 8) ? 11 : 23;
+			var next = (qid === 3) ? 11 : 23;
 			displayPopup("Goed zo!", "Op naar de huishoudelijke producten!", function () {
 			displayQuestion(next);
 			document.getElementById('popup').style.display = "none";
 			})
 		} else if (!careDone){
-			var next = (qid === 3 || global_state.earth > 8) ? 9 : 21;
+			var next = (qid === 3) ? 9 : 21;
 			displayPopup("Goed zo!", "Tijd om de cosmetica en verzorgingstak van je bedrijf onder de loep te nemen!", function () {
 			displayQuestion(next);
 			document.getElementById('popup').style.display = "none";
 			})
 		} else {
-			var next = (qid === 3 || global_state.earth > 8) ? 4 : 19;
+			var next = (qid === 3 ) ? 4 : 19;
 			displayPopup("Goed zo!", "Tijd om je te verdiepen in de voedingsproducten!", function () {
 			displayQuestion(next);
 			document.getElementById('popup').style.display = "none";
