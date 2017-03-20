@@ -23,8 +23,8 @@
  	tm_dark_green = "#60795b",
  	tm_light_green = "#71956c",
  	tm_red = "#e0421d",
- 	tm_yellow = "#E0DD1D",
- 	tm_orange = "#E0931D",
+ 	tm_yellow = "#ddb661",
+ 	tm_orange = "#d38d5f", //#D19D6D 
  	brown = "#956c5c",
  	earth_final = "#5b5447",
 	business_final = "#5b5447";
