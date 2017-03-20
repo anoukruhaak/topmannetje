@@ -37,8 +37,8 @@ h1 {
   position: absolute;
   display: inline-block;
   z-index: 10;
-  margin-top:3%;
-  top:3%;
+  margin-top:6%;
+  top:6%;
   width: 70%;
   height:30%;
   transform: translate(20%, -20%);
@@ -179,14 +179,14 @@ h1 {
   position: absolute;
   display: inline-block;
   z-index: 10;
-  margin-top:3%;
-  top:3%;
+  margin-top:6%;
+  top:6%;
   width: 70%;
   height:30%;
   transform: translate(20%, -20%);
   text-align: center;
   text-anchor: middle;
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: 600;
   color: #102d43;
 }
