@@ -23,7 +23,11 @@
  	tm_dark_green = "#60795b",
  	tm_light_green = "#71956c",
  	tm_red = "#e0421d",
- 	brown = "#956c5c";
+ 	tm_yellow = "#ffb500",
+ 	tm_orange = "#db8504",
+ 	brown = "#956c5c",
+ 	earth_final = "#5b5447",
+	business_final = "#5b5447";
 
  // var d = Snap("#duurzaamheidsman"),
  // 	legs = d.select("g[id='been']");
@@ -58,7 +62,7 @@ class State {
 	}
 }
 
-var global_state = new State(5, 5, 0),
+var global_state = new State(0, 0, 0),
  	selected_question = 0,
  	foodDone = false,
  	homeDone = false,
@@ -92,7 +96,7 @@ new NewsText(21, "Nieuwe topman Unilever wil hogere marges en meer winst."),
 new NewsText(22, "Unilever verwelkomt nieuwe topman."),
 ];
 
-var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answerA": new Answer(0.1, "Man", -1, 1, 20, 1), 
+var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answerA": new Answer(0.1, "Man", -1, 3, 20, 1), 
 "answerB": new Answer(0.2, "Vrouw", 0, 0, 20, 0), 
 "answerC": new Answer(0.3, "Geen van beiden.", 0, 0, 20, 0),
 "audio": null, "animation": null},
@@ -580,49 +584,64 @@ function updateState(current_state){
 			showGlobe(0);
 			colorGlobe(0);
 			earth_state = 1;
+			earth_final = tm_dark_green;
 
 		} else if (points > 22) {
 			showGlobe(1);
 			colorGlobe(0);
 			earth_state = 2;
+			earth_final = tm_light_green;
 
 		} else if (points > 10){
 			showGlobe(1);
 			colorGlobe(1);
 			earth_state = 3;
+			earth_final = tm_yellow;
 		}
 
 		else if (points > 5) {
 			showGlobe(2);
 			colorGlobe(1);
 			earth_state = 4;
+			earth_final = tm_yellow;
 		}
 
 		else if (points > -5) {
 			showGlobe(2);
 			colorGlobe(2);
 			earth_state = 5;
+			earth_final = tm_orange;
 
 		} else {
 			showGlobe(3);
 			colorGlobe(3);
 			earth_state = 6;
+			earth_final = tm_red;
 		}
 	}
 
 	function updateBusiness(points) {
 		var old_state = business_state;
 		
-		if (points > 20) {
+		if (points > 18) {
 			showFactories(true, true, true);
 			business_state = 1;
+			business_final = tm_light_green;
 
-		} else if (points < 3) {
+		}
+		else if(points > 8){
+			showFactories(true, true, false);
+			business_state = 2;
+			business_final = tm_yellow;
+
+		} else if (points < 2) {
 			showFactories(true, false, false);
 			business_state = 3;
+			business_final = tm_red;
 		} else {
 			showFactories(true, true, false);
 			business_state = 2;
+			business_final = tm_orange;
 		}
 
 		if (business_state != old_state) {
@@ -634,12 +653,12 @@ function updateState(current_state){
 		var earth_color = (earth >= 0) ? tm_light_green : tm_red,
 			business_color = (business >= 0) ? tm_light_green : tm_red;
 
-		plank_globe.animate({fill: earth_color}, 1500, mina.easein, function () {
-			plank_globe.animate({fill: plank_color}, 1000, mina.easeout, null);
+		plank_globe.animate({fill: earth_color}, 800, mina.easein, function () {
+			plank_globe.animate({fill: earth_final}, 2500, mina.easeout, null);
 		});
 
-		plank_fabriek.animate({fill: business_color}, 1500, mina.easein, function () {
-			plank_fabriek.animate({fill: plank_color}, 1000, mina.easeout, null);
+		plank_fabriek.animate({fill: business_color}, 800, mina.easein, function () {
+			plank_fabriek.animate({fill: business_final}, 2500, mina.easeout, null);
 		});
 	}
 	
@@ -904,7 +923,7 @@ function bounceHulpButton() {
 
 //------------------------------------TIMER------------------------------------------
 function restartGame() {
-	global_state = new State(5, 5, []),
+	global_state = new State(0, 0, []),
  	selected_question = 0,
  	foodDone = false,
  	homeDone = false,
