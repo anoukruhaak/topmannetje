@@ -81,7 +81,7 @@ var global_state = new State(0, 0, 0),
  	foodDone = false,
  	homeDone = false,
  	careDone = false,
- 	earth_state = 4,
+ 	earth_state = 5,
  	business_state = 2;
 
 
