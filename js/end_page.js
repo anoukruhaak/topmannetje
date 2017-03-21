@@ -68,7 +68,7 @@ function setUp() {
 
 	function goToTwitter() {
 		var img = getImage();
-		var url = "https://twitter.com/share?url="+escape("http://topmannetje.herokuapp.com")+"&text=Wat+voor+topman+ben+jij%3F"+"&image-src=http://topmannetje.herokuapp.com/img/" + img;	
+		var url = "https://twitter.com/home?status=Wat%20voor%20topman%20ben%20jij?%20Red%20jij%20de%20planeet?%20Of%20ga%20je%20voor%20de%20winst?%20http%3A//topmannetje.herokuapp.com/index.html"
 		window.location.href = url;
 	}
 
