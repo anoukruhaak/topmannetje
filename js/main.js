@@ -201,8 +201,8 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "audio": null, "animation": null},
 
 {"id": 14, "text": "Memo van je marketingmanager: de vraag naar luxe ijsjes neemt toe in Nigeria. Pak je die kans?", 
-"answerA": new Answer(14.1, "Natuurlijk: iedereen heeft recht op Magnums. Ik bestel alvast 20 duizend extra diepvriezers", -10, 10, 0, 15), 
-"answerB": new Answer(14.2, "Ik promoot ‘Jane & Jerry’ vruchtenijs op waterbasis; zonder zuivel met lokaal fruit.", 5, 0, 0, 15), 
+"answerA": new Answer(14.1, "Natuurlijk: iedereen heeft recht op Magnums. Ik bestel alvast 20 duizend extra diepvriezers", -10, 10, 16, 15), 
+"answerB": new Answer(14.2, "Ik promoot ‘Jane & Jerry’ vruchtenijs op waterbasis; zonder zuivel met lokaal fruit.", 5, 0, 16, 15), 
 "answerC": new Answer(14.3, "We bouwen onze ijsdivisie af", 10, -10, 10, 15),
 "audio": "duck", "animation": animateMarketingMan},
 
@@ -796,6 +796,7 @@ function setUp(){
 			changeBackgroundColor("grey", "#99a2a2", answer_c.select("rect"));
 			var next = c.next;
 			processAnswer(c);
+			findNextQuestion(next, selected_question);
 		}
 	};
 	moveNewsBanner();
