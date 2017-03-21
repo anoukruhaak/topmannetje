@@ -220,7 +220,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "audio": null, "animation": bounceHulpButton},
 
 //Fossiel start
-{"id": 17, "text": "Volgens marktonderzoek gaat het niet goed met de reputatie van je bedrijf. Tijd voor nieuwe slogan. Wat wordt het? ", 
+{"id": 17, "text": "Volgens marktonderzoek gaat het niet goed met de reputatie van je bedrijf. Tijd voor een nieuwe slogan. Wat wordt het? ", 
 "answerA": new Answer(17.1, "We doen ons best, iets beter dan de rest.", -1, 5, 22, 18), 
 "answerB": new Answer(17.2, "Deal with it", -1, 5, 22, 18), 
 "answerC": new Answer(17.3, "Doe maar lekker duurzaam", -5, 5, 22, 18),
