@@ -43,7 +43,10 @@ var Sounds = {
     rainForest: new Audio('./audio/rain_forest.mp3'),
     rutte: new Audio('./audio/voicemail.mp3'),
     monkey: new Audio('./audio/monkey.mp3'),
-    children: new Audio('./audio/children.mp3')
+    children: new Audio('./audio/children.mp3'),
+    bg_sound: new Audio('./audio/bg-sound.wav'),
+    earth_up: new Audio('./audio/wind.wav'),
+    earth_down: new Audio('./audio/wind.wav')
 };
 
 class Answer {
@@ -734,6 +737,8 @@ function setUp(){
 	setElementAboveScreen(m);
 	setElementAboveScreen(r);
 
+	loopSound("bg_sound");
+
 	help.mouseover(animateHelpButton,resetSVG);
 	koffer.drag();
 	newsText.select("text[id='txt1']").attr({"color": tm_red});
@@ -791,7 +796,6 @@ function setUp(){
 			changeBackgroundColor("grey", "#99a2a2", answer_c.select("rect"));
 			var next = c.next;
 			processAnswer(c);
-			findNextQuestion(next, selected_question);
 		}
 	};
 	moveNewsBanner();
@@ -958,8 +962,18 @@ function goToLoading() {
 
 
 function playSound(name) {
+	Sounds[name].volume = 0.8;
     Sounds[name].currentTime = 0;
     Sounds[name].play();
+}
+
+function loopSound(name) {
+	Sounds[name].volume = 0.3;
+	Sounds[name].addEventListener('ended', function() {
+	    this.currentTime = 0;
+	    this.play();
+	}, false);
+	Sounds[name].play();
 }
 
 setUp();
