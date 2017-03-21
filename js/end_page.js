@@ -14,6 +14,14 @@ function transitionToEndPage(){
 	}, 1500);
 }
 
+function displayPopup(action) {
+	document.getElementById("popup-button").onclick = function() { 
+            action();
+        };
+	popup.style.display = "block";
+
+}
+
 function setUp() {
 	function getImage() {
 		var url = window.location.pathname,
@@ -40,6 +48,7 @@ function setUp() {
 	var arrow = end_page.select("text[id='button']"),
 		fb = end_page.select("path[id='fb']"),
 		mail = end_page.select("g[id='mail']"),
+		link = end_page.select("g[id='link']"),
 		twitter = end_page.select("path[id='twitter']");
 
 	arrow.node.onclick = function () {
@@ -58,6 +67,12 @@ function setUp() {
 		sendEmail();
 	};
 
+	link.node.onclick = function () {
+		displayPopup(function () {
+			document.getElementById('popup').style.display = "none";
+		});
+	};
+
 	function goToFacebook() {
 		var img = getImage();
 		var url = "https://www.facebook.com/sharer/sharer.php?u=topmannetje.herokuapp.com/topmannetje.html&title=Wat+voor+topman+ben+jij%3F&caption=Platform+Investico&quote=&description=Wat+voor+topmannetje+ben+jij%3F+Ga+jij+voor+het+snelle+geld%3F+Of+zet+je+je+bedrijf+in+om+de+planeet+te+redden%3F";
@@ -73,8 +88,7 @@ function setUp() {
 	}
 
 	function sendEmail(){
-		window.location.href = "mailto:?subject=Wat voor topman ben jij?&body=I thought you might find this information interesting:&attachment=http://topmannetje.herokuapp.com/img/appelboer.jpg";
-	}
+		window.location.href = "mailto:email?&subject=Speel topmannetje!&body=Ben%20jij%20een%20groene%20topman?%20Of%20gaat%20bij%20jou%20de%20winst%20voor%20de%20planeet?%20Wat%20voor%20topman%20ben%20jij?%20Speel%20het%20spel%3A%20http%3A//topmannetje.herokuapp.com/topmannetje.html"}
 }
 
 // https://www.facebook.com/sharer/sharer.php?undefined&picture=http://topmannetje.herokuapp.com/img/appelboer.jpg&title=Speel%20topmannetje!&caption=Platform%20Investio
