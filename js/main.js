@@ -117,7 +117,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 
 {"id": 1, "text": "Gefeliciteerd! Je bent topman van Unilever. De planeet kreunt onder jouw productie. Je eerste besluit:", 
 "answerA": new Answer(1.1, "Ik gooi het roer om en kies voor een volledig duurzame productie", 5, -5, 0, 2), 
-"answerB": new Answer(1.2, "Ik kan dit niet oplossen. We onderzoeken vergroening maar draaien voorlopig op de oude voet door.", -5, 5, 2, 17), 
+"answerB": new Answer(1.2, "Ik kan dit niet oplossen. We onderzoeken vergroening maar draaien voorlopig op de oude voet door.", -10, 10, 2, 17), 
 "answerC": null, 
 "audio": "applause", "animation": null}, 
 
