@@ -45,8 +45,9 @@ var Sounds = {
     monkey: new Audio('./audio/monkey.mp3'),
     children: new Audio('./audio/children.mp3'),
     bg_sound: new Audio('./audio/bg-sound.wav'),
-    earth_up: new Audio('./audio/wind.wav'),
-    earth_down: new Audio('./audio/wind.wav')
+    earth_up: new Audio('./audio/bird-song.mp3'),
+    earth_middle: new Audio('./audio/coyote.mp3'),
+    earth_down: new Audio('./audio/explosion.mp3')
 };
 
 class Answer {
@@ -210,7 +211,7 @@ var questions = [{"id": 0, "text": "Welkom! Ben je een hij of een zij?", "answer
 "answerA": new Answer(15.1, "Je haalt palmolie waar mogelijk uit je producten.", 5, -5, 15, 16), 
 "answerB": new Answer(15.2, "Je bedankt voor het rapport en stelt een samenwerking voor.", -5, 5, 15, 16), 
 "answerC": new Answer(15.2, "Je kaart de kwestie aan bij de volgende vergadering van de Roundtable for Sustainable Palm Oil.", -5, 5, 15, 16),
-"audio": "rainForest.mp3", "animation": null},
+"audio": "rainForest", "animation": null},
 
 {"id": 16, "text": "Al die duurzaamheid is niet goed voor je balans. Je aandeelhouders zijn boos. Wat doe je?", 
 "answerA": new Answer(16.1, "Je ontslaat je VP.", 5, -5, 0, 100), 
@@ -629,6 +630,14 @@ function updateState(current_state){
 			colorGlobe(3);
 			earth_state = 6;
 			earth_final = tm_red;
+		}
+
+		if (old_state < earth_state && (earth_state === 6 || earth_state === 5)) {
+			playSound("earth_down");
+		} else if (old_state < earth_state) {
+			playSound("earth_middle");
+		} else if(old_state > earth_state){
+			playSound("earth_up");
 		}
 	}
 
