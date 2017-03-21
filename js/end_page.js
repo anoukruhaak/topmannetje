@@ -26,10 +26,10 @@ function setUp() {
 				return "duurzaam.jpg";
 				break;
 			case "reputatie.html":
-				return "baas.jpg";
+				return "reputatiemanager.jpg";
 				break;
 			case "speel_op_zeker":
-				return "reputatiemanager.jpg";
+				return "baas.jpg";
 				break;
 			default:
 				return "reputatiemanager.jpg";
@@ -60,7 +60,7 @@ function setUp() {
 
 	function goToFacebook() {
 		var img = getImage();
-		var url = "https://www.facebook.com/sharer/sharer.php?u=topmannetje.herokuapp.com&title=Wat+voor+topman+ben+jij%3F&caption=Platform+Investico&quote=&description=Wat+voor+topmannetje+ben+jij%3F+Ga+jij+voor+het+snelle+geld%3F+Of+zet+je+je+bedrijf+in+om+de+planeet+te+redden%3F";
+		var url = "https://www.facebook.com/sharer/sharer.php?u=topmannetje.herokuapp.com/topmannetje.html&title=Wat+voor+topman+ben+jij%3F&caption=Platform+Investico&quote=&description=Wat+voor+topmannetje+ben+jij%3F+Ga+jij+voor+het+snelle+geld%3F+Of+zet+je+je+bedrijf+in+om+de+planeet+te+redden%3F";
 		var picture = "&picture=http%3A%2F%2Ftopmannetje.herokuapp.com%2Fimg%2F"+ img 
 		console.log(url);
 		window.location.href = url + picture;
