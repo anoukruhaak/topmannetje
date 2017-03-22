@@ -75,20 +75,20 @@ function setUp() {
 
 	function goToFacebook() {
 		var img = getImage();
-		var url = "https://www.facebook.com/sharer/sharer.php?u=platform-investico.nl/topmannetje.html&title=Wat+voor+topman+ben+jij%3F&caption=Platform+Investico&quote=&description=Wat+voor+topmannetje+ben+jij%3F+Ga+jij+voor+het+snelle+geld%3F+Of+zet+je+je+bedrijf+in+om+de+planeet+te+redden%3F";
-		var picture = "&picture=http%3A%2F%2Fplatform-investico.nl%2Fimg%2F"+ img 
+		var url = "https://www.facebook.com/sharer/sharer.php?u=platform-investico.nl/topmannetje&title=Wat+voor+topman+ben+jij%3F&caption=Platform+Investico&quote=&description=Wat+voor+topmannetje+ben+jij%3F+Ga+jij+voor+het+snelle+geld%3F+Of+zet+je+je+bedrijf+in+om+de+planeet+te+redden%3F";
+		var picture = "&picture=http%3A%2F%2Fplatform-investico.nl%2Ftopmannetje%2Fimg%2F"+ img 
 		console.log(url);
 		window.location.href = url + picture;
 	}
 
 	function goToTwitter() {
 		var img = getImage();
-		var url = "https://twitter.com/home?status=Wat%20voor%20topman%20ben%20jij?%20Red%20jij%20de%20planeet?%20Of%20ga%20je%20voor%20de%20winst?%20http%3A//platform-investico.nl/index.html"
+		var url = "https://twitter.com/home?status=Wat%20voor%20topman%20ben%20jij?%20Red%20jij%20de%20planeet?%20Of%20ga%20je%20voor%20de%20winst?%20http%3A//platform-investico.nl/topmannetje"
 		window.location.href = url;
 	}
 
 	function sendEmail(){
-		window.location.href = "mailto:email?&subject=Speel topmannetje!&body=Ben%20jij%20een%20groene%20topman?%20Of%20gaat%20bij%20jou%20de%20winst%20voor%20de%20planeet?%20Wat%20voor%20topman%20ben%20jij?%20Speel%20het%20spel%3A%20http%3A//platform-investico.nl/topmannetje.html"}
+		window.location.href = "mailto:email?&subject=Speel topmannetje!&body=Ben%20jij%20een%20groene%20topman?%20Of%20gaat%20bij%20jou%20de%20winst%20voor%20de%20planeet?%20Wat%20voor%20topman%20ben%20jij?%20Speel%20het%20spel%3A%20http%3A//platform-investico.nl/topmannetje"}
 }
 
 // https://www.facebook.com/sharer/sharer.php?undefined&picture=http://topmannetje.herokuapp.com/img/appelboer.jpg&title=Speel%20topmannetje!&caption=Platform%20Investio
