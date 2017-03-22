@@ -52,7 +52,7 @@ function setUp() {
 		twitter = end_page.select("path[id='twitter']");
 
 	arrow.node.onclick = function () {
-		window.location.href = "http://www.platform-investico.nl";
+		window.location.href = "http://www.platform-investico.nl/artikel/duurzaamheid-uit-een-pakje/";
 	};
 
 	fb.node.onclick = function () {
