@@ -64,7 +64,7 @@ h1 {
   display: none;
   pointer-events: none;
   text-anchor: middle;
-  font-size: 1.1em;
+  font-size: 1.2em;
   font-weight: 600;
   color: #102d43;
 }
@@ -75,7 +75,7 @@ h1 {
   width: 70%;
   transform: translate(30%, 0%);
   text-align: left;
-  font-size: 0.9em;
+  font-size: 0.85em;
   font-weight: 600;
   color: #292828;
 }
