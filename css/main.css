@@ -37,9 +37,9 @@ h1 {
   z-index: 10;
   margin-top:3%;
   top:3%;
-  width: 70%;
+  width: 80%;
   height:30%;
-  transform: translate(20%, -20%);
+  transform: translate(10%, -20%);
   text-align: center;
 }
 
@@ -64,7 +64,7 @@ h1 {
   display: none;
   pointer-events: none;
   text-anchor: middle;
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: 600;
   color: #102d43;
 }
@@ -72,8 +72,8 @@ h1 {
 .antwoord {
   display: none;
   pointer-events: none;
-  width: 60%;
-  transform: translate(40%, 0%);
+  width: 70%;
+  transform: translate(30%, 0%);
   text-align: left;
   font-size: 0.9em;
   font-weight: 600;
