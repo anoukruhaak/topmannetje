@@ -69,7 +69,7 @@ h1 {
   color: #102d43;
 }
 
-.antwoord {
+.antwoord-game {
   display: none;
   pointer-events: none;
   width: 70%;
