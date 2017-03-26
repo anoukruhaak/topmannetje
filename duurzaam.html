@@ -10,13 +10,33 @@
 <body style="width:100%;height:100%; overflow: scroll; margin: 0; padding: 0; background-color:#BBD4D7;">
 
 <div class= "outer-div">
-
-	
 <div class="copy-popup" id="popup">
 	    <!-- Target -->
 	<button class="copy-popup-button" id="popup-button">X</button>
-	<input id="foo" class="input-field" type="text" value="https://topmannetje.com">
+	<input id="foo" class="input-field" type="text" value="https://www.platform-investico.nl/topmannetje">
     <button class="btn" data-clipboard-action="copy" data-clipboard-target="#foo">Kopieer</button>
+    <!-- 2. Include library -->
+    <script src="./js/clipboard.min.js"></script>
+
+    <!-- 3. Instantiate clipboard -->
+    <script>
+    var clipboard = new Clipboard('.btn');
+
+    clipboard.on('success', function(e) {
+        console.log(e);
+    });
+
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+    </script>
+</div>
+
+<div class="copy-popup" id="popup-link">
+	    <!-- Target -->
+	<button class="copy-popup-button" id="popup-button-link">X</button>
+	<input id="link" class="input-field" type="text" value="https://www.groene.nl/artikel/duurzaamheid-uit-een-pakje">
+    <button class="btn" data-clipboard-action="copy" data-clipboard-target="#link">Kopieer</button>
     <!-- 2. Include library -->
     <script src="./js/clipboard.min.js"></script>
 

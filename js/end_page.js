@@ -14,11 +14,11 @@ function transitionToEndPage(){
 	}, 1500);
 }
 
-function displayPopup(action) {
-	document.getElementById("popup-button").onclick = function() { 
+function displayPopup(popup_name, popup_button, action) {
+	document.getElementById(popup_button).onclick = function() { 
             action();
         };
-	popup.style.display = "block";
+	document.getElementById(popup_name).style.display = "block";
 
 }
 
@@ -52,7 +52,11 @@ function setUp() {
 		twitter = end_page.select("path[id='twitter']");
 
 	arrow.node.onclick = function () {
-		window.location.href = "http://www.platform-investico.nl/artikel/duurzaamheid-uit-een-pakje/";
+		var name = "popup-link",
+			button = "popup-button-link";
+		displayPopup(name, button, function () {
+			document.getElementById(name).style.display = "none";
+		});
 	};
 
 	fb.node.onclick = function () {
@@ -68,8 +72,10 @@ function setUp() {
 	};
 
 	link.node.onclick = function () {
-		displayPopup(function () {
-			document.getElementById('popup').style.display = "none";
+			var name = "popup",
+			button = "popup-button";
+		displayPopup(name, button, function () {
+			document.getElementById(name).style.display = "none";
 		});
 	};
 
